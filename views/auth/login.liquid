@@ -1,17 +1,41 @@
 {% layout 'layout.liquid' %}
 {% block content %}
 
-<div class="container-sm">
+  <div class="container-fluid mtg-form">
     <form action="/auth/login" method="POST">
-        <fieldset>
-            <legend>Welcome Back, Please log in to continue</legend>
-            <label class="form-label">Username: </label>
-            <input type="text" name="username" placeholder="username" class="form-control" required>
-            <label class="form-label">Password</label>
-            <input type="password" name="password" placeholder="enter password" class="form-control" required>
-        </fieldset>
-        <input type="submit" value="Log In" class="btn btn-success">
+      <fieldset class="mtg-form">
+        <legend>
+          <h3>Welcome Back!</h3>
+          <h5>Please log in to continue...</h5>
+        </legend>
+        <div class="mtg-elem">
+          <label class="form-label">Username:
+          </label>
+          <input
+            type="text"
+            name="username"
+            placeholder="username"
+            class="form-control"
+            required>
+        </div>
+        <div class="mtg-elem">
+          <label class="form-label">Password:</label>
+          <input
+            type="password"
+            name="password"
+            placeholder="enter password"
+            class="form-control"
+            required>
+        </div>
+      </fieldset>
+      <div class="btn-container-block">
+        <input
+          type="submit"
+          value="Log In"
+          class="btn btn-success">
+      </div>
     </form>
-</div>
+
+  </div>
 
 {% endblock %}

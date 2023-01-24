@@ -8,7 +8,14 @@ MtG Deckbuilder allows a group of people to create a tournament style MtG deck f
 
 Create a collection of 'approved' cards pulled from the MtG api, then each user may build decks from those cards, giving their freinds the opportunity to troll them endlessly with comments.
 
-### not sure what goals for each 'sprint' means exactly??
+### Sprints
+
+#### Day One
+
+Basic styling objectives:
+
+-   colors
+-   fonts
 
 ### MVP
 
