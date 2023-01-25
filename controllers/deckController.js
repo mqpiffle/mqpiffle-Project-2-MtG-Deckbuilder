@@ -49,25 +49,14 @@ router.get('/mine', (req, res) => {
 // new route -> GET route that renders our page with the form
 // when i go to the new page, i want to render all of the cards in the
 // allowed collection to the page. these can be added with an add button
-router.get('/new', async (req, res) => {
-    const setsArray = ['4ED']
-    const cards = await axios(`${process.env.MTG_URL}?set=4ED`)
-    console.log(cards.data)
-    // cards returns an object as data which includes one element
-    // and array of cards
-    // need to drill down into that array to access the properties needed
-    cardData = cards.data
-    const cardInfo = cardData.cards.map(card => {
-        return { image: card.imageUrl, id: card.id }
-    })
-    console.log(cardInfo)
-    res.render('decks/new', { ...cardInfo, ...req.session })
+router.get('/new', (req, res) => {
+    // console.log(cards)
+    res.render('decks/new', { ...req.session })
 })
 
 // create -> POST route that actually calls the db and makes a new document
 router.post('/', (req, res) => {
-    req.body.ready = req.body.ready === 'on' ? true : false
-
+    console.log
     req.body.owner = req.session.userId
     Deck.create(req.body)
         .then(deck => {
@@ -80,12 +69,21 @@ router.post('/', (req, res) => {
 })
 
 // edit route -> GET that takes us to the edit form view
-router.get('/:id/edit', (req, res) => {
+router.get('/:id/edit', async (req, res) => {
     // we need to get the id
     const deckId = req.params.id
+    const card = await axios(`${process.env.MTG_URL}?set=4ED&random=true`)
+    // console.log(card.data)
+    // cards returns an object as data which includes one element
+    // and array of cards
+    // need to drill down into that array to access the properties needed
+    cardData = card.data
+    const cards = cardData.cards.map(card => {
+        return { image: card.imageUrl, id: card.id }
+    })
     Deck.findById(deckId)
         .then(deck => {
-            res.render('deck/edit', { deck })
+            res.render('decks/edit', { cards, deck, ...req.session })
         })
         .catch(error => {
             res.redirect(`/error?error=${error}`)
@@ -123,7 +121,7 @@ router.get('/:id', (req, res) => {
 router.delete('/:id', (req, res) => {
     const deckId = req.params.id
     Deck.findByIdAndRemove(deckId)
-        .then(deck => {
+        .then(() => {
             res.redirect('/decks')
         })
         .catch(error => {

@@ -1,22 +1,38 @@
 {% layout 'layout.liquid' %}
 {% block content %}
-  <div class="container-fluid mtg-std-container mtg-display-width">
+  <div class="mtg-std-container mtg-display-width">
     <a class="mtg-btn-p" href="/decks/new">Create New Deck</a>
     {% if decks.length > 0 %}
-      <div>
-        <h2 class="display-6">All Decks</h2>
-        <div class="row">
+      <div class="mtg-grid-container">
+        <h2>All Decks</h2>
+        <div class="mtg-deck-grid">
           {% for deck in decks %}
-            <div class="card" style="width: 18rem;">
-              <h5 class="card-header">{{ deck.name }}</h5>
+            <div class="mtg-deck-card">
+              <h3 class="card-header">{{ deck.name }}</h5>
               <div class="card-body">
+                <h5>{{ deck.cards.length }} cards</h5>
                 <p class="card-text">
-                  Body: {{ deck.description }}
+                  {{ deck.description }}
                 </p>
-                {% # if user != owner display owner name %}
-                <a href="/deck/{{ deck.id }}" class="btn btn-info">
-                  View {{ deck.name }}
-                </a>
+                <div class="btn-container-inline">
+                  {% if loggedIn %}
+                    <a href="/decks/{{ deck.id }}/edit" class="mtg-btn-t">
+                      Edit
+                    </a>
+                    <form action="/decks/{{ deck.id }}?_method=DELETE" method="POST">
+                      <input
+                        type="submit"
+                        class="mtg-btn-s"
+                        value="DELETE">
+                    </form>
+                  {% else %}
+                    <a href="/deck/{{ deck.id }}" class="mtg-btn-t">
+                      View
+                    </a>
+                  {% endif %}
+                  {% # if user != owner display owner name %}
+
+                </div>
               </div>
             </div>
           {% endfor %}
