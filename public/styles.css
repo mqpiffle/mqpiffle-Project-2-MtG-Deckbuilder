@@ -152,7 +152,6 @@ fieldset {
 }
 
 .mtg-std-container {
-    width: min(65ch, 99%);
     margin: 3rem auto;
     display: flex;
     flex-direction: column;
@@ -256,5 +255,7 @@ fieldset {
 }
 
 .mtg-display-left {
-    border-right: 3px solid var(--gray-30);
+    width: fit-content;
+    padding-inline: 1rem;
+    border-right: 3px solid var(--gray-20);
 }

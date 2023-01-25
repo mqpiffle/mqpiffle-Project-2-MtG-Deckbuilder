@@ -1,6 +1,8 @@
 // Import Dependencies
 const express = require('express')
 const Deck = require('../models/deck')
+const axios = require('axios')
+require('dotenv').config()
 
 // Create router
 const router = express.Router()
@@ -47,9 +49,19 @@ router.get('/mine', (req, res) => {
 // new route -> GET route that renders our page with the form
 // when i go to the new page, i want to render all of the cards in the
 // allowed collection to the page. these can be added with an add button
-router.get('/new', (req, res) => {
-    const { username, userId, loggedIn } = req.session
-    res.render('decks/new', { username, loggedIn })
+router.get('/new', async (req, res) => {
+    const setsArray = ['4ED']
+    const cards = await axios(`${process.env.MTG_URL}?set=4ED`)
+    console.log(cards.data)
+    // cards returns an object as data which includes one element
+    // and array of cards
+    // need to drill down into that array to access the properties needed
+    cardData = cards.data
+    const cardInfo = cardData.cards.map(card => {
+        return { image: card.imageUrl, id: card.id }
+    })
+    console.log(cardInfo)
+    res.render('decks/new', { ...cardInfo, ...req.session })
 })
 
 // create -> POST route that actually calls the db and makes a new document
