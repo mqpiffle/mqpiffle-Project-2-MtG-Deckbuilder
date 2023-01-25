@@ -1,43 +1,91 @@
 {% layout 'layout.liquid' %}
 {% block content %}
-  <div class="container-sm">
-    <form action="/examples?_method=PUT" method="POST">
-      <fieldset>
-        <legend>Create New Example</legend>
-        <label class="form-label">Title:
-        </label>
-        <input
-          type="text"
-          name="title"
-          placeholder="{{ example.title }}"
-          value="{{ example.title }}"
-          class="form-control">
-        <label class="form-label">Body:</label>
-        <input
-          type="text"
-          name="body"
-          placeholder="{{ example.body }}"
-          value="{{ example.body }}"
-          class="form-control">
-        <label class="form-label">Amount:</label>
-        <input
-          type="number"
-          name="amount"
-          value="{{ example.amount }}"
-          class="form-control">
-        <label class="form-label">Ready:</label>
-        <input
-          type="checkbox"
-          name="ready"
-          class="form-check-input"
-          {% if example.ready %}
-          checked
-          {% endif %}>
-      </fieldset>
-      <input
-        type="submit"
-        value="Edit Example"
-        class="btn btn-success">
-    </form>
+  {% # need two elements: the FORM(left) and the CARDS(right) %}
+  <div class="mtg-inflx-container mtg-display-width">
+    {% # FORM %}
+    {% # 'left' side of screen %}
+    {% # DETAILS on top %}
+    <div class="mtg-display-left">
+      <div class="mtg-form">
+        <form action="/decks" method="POST">
+          <fieldset>
+            <legend>
+              <h2>Edit Deck</h2>
+            </legend>
+            <div class="mtg-elem">
+              <label class="form-label">Deck Name:
+              </label>
+              <input
+                type="text"
+                name="name"
+                placeholder="{{ deck.name }}"
+                class="form-control">
+            </div>
+            <div class="mtg-elem">
+              <label class="form-label">Description:</label>
+              <textarea class="form-control" name="description" rows="12" cols="22" maxlength="100" placeholder="{{deck.description}}"></textarea>
+            </div>
+          </fieldset>
+          <div class="btn-container-inline">
+            <input
+              type="submit"
+              value="Save"
+              class="mtg-btn-p">
+              <form action="/decks/{{ deck.id }}?_method=DELETE" method="POST">
+                      <input
+                        type="submit"
+                        class="mtg-btn-s"
+                        value="DELETE">
+                    </form>
+          </div>
+        </form>
+      </div>
+      {% # chosen CARDS listed on the bottom %}
+      {% # grid with one element (1fr) per row %}
+    </div>
+    {% # CARDS grid %}
+    <div class="mtg-display-right">
+      {% # since only 100 cards may be pulled from the api at a time %}
+      {% # set up a filter by color %}
+      {% # <div class="mtg-form">
+        
+        #<form action="/decks/new" method="GET">
+         # <fieldset>
+          #  <legend>
+           #   <h2>Filter card by color, land, or artifact</h2>
+            
+           #</legend>
+            #<div class="mtg-elem">
+             # <label class="form-label">Options:
+              #</label>
+             # <select name="cardfilter" class="form-control">
+              #  <option value="B" selected>Black Cards</option>
+               # <option value="U">Blue Cards</option>
+                #<option value="G">Green Cards</option>
+                #<option value="R">Red Cards</option>
+                #<option value="W">White Cards</option>
+                #</select>
+            #</div>
+          #</fieldset>
+          #<div class="btn-container-block">
+            #<input
+              #type="submit"
+              #value="Filter"
+              #class="mtg-btn-p">
+          #</div>
+        #</form>
+      #</div> %}
+      <div class="mtg-cards-grid">
+      {% if cards.length > 0 %}
+        {% for card in cards %}
+          <div>
+            <img src="{{card.image}}" width="200"></img>
+
+          </div>
+        {% endfor %}
+      {% else %}
+      {% endif %}
+      </div>
+    </div>
   </div>
 {% endblock %}
