@@ -22,7 +22,7 @@ middleware(app);
 ////////////////////
 
 app.use("/auth", UserRouter);
-app.use("/examples", DeckRouter);
+app.use("/decks", DeckRouter);
 
 app.get("/", (req, res) => {
     const { username, userId, loggedIn } = req.session;

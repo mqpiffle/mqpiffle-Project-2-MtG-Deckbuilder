@@ -1,37 +1,48 @@
 {% layout 'layout.liquid' %}
 {% block content %}
-<div class="container-sm">
-    <form action="/examples" method="POST">
-        <fieldset>
-            <legend>Create New Example</legend>
-            <label class="form-label">Title: </label>
-            <input 
-                type="text" 
-                name="title" 
-                placeholder="enter example title"
-                class="form-control"
-            >
-            <label class="form-label">Body:</label>
-            <input 
-                type="text" 
-                name="body" 
-                placeholder="enter example body" 
-                class="form-control"
-            >
-            <label class="form-label">Amount:</label>
-            <input 
-                type="number" 
-                name="amount" 
-                class="form-control"
-            >
-            <label class="form-label">Ready:</label>
-            <input 
-                type="checkbox" 
-                name="ready" 
-                class="form-check-input"
-            >
-        </fieldset>
-        <input type="submit" value="Create New Example" class="btn btn-success">
-    </form>
-</div>
+  {% # need two elements: the FORM(left) and the CARDS(right) %}
+  <div class="container-fluid">
+    {% # FORM %}
+    {% # 'left' side of screen %}
+    {% # DETAILS on top %}
+    <div class="mtg-display-left">
+      <div class="mtg-form">
+        <form action="/decks" method="POST">
+          <fieldset>
+            <legend>
+              <h2>Create New Deck</h2>
+            </legend>
+            <div class="mtg-elem">
+              <label class="form-label">Deck Name:
+              </label>
+              <input
+                type="text"
+                name="name"
+                placeholder="Reign of Death"
+                class="form-control">
+            </div>
+            <div class="mtg-elem">
+              <label class="form-label">Description:</label>
+              <input
+                type="text"
+                name="body"
+                maxlength:100
+                placeholder="max 100 characters"
+                class="form-control">
+            </div>
+          </fieldset>
+          <div class="btn-container-block">
+            <input
+              type="submit"
+              value="Create New Deck"
+              class="mtg-btn-p">
+          </div>
+        </form>
+      </div>
+      {% # chosen CARDS listed on the bottom %}
+      {% # grid with one element (1fr) per row %}
+    </div>
+    {% # CARDS grid %}
+    <div class="mtg-display-right mtg-cards-grid"></div>
+  </div>
 {% endblock %}

@@ -100,3 +100,8 @@ Basic styling objectives:
 ## ERD
 
 ![MtG-ERD-v1](images/MtG-ERD-v1.jpg)
+
+### API Data Flow
+
+-   CREATE Deck:
+    -   page loads with form on left and all cards on right

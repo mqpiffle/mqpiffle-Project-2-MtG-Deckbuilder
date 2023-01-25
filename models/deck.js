@@ -1,5 +1,7 @@
 // import dependencies
 const mongoose = require("../utils/connection");
+const commentSchema = require("./comment");
+const cardSchema = require("./card");
 
 // import user model for populate
 const User = require("./user");
@@ -9,19 +11,21 @@ const { Schema, model } = mongoose;
 
 const deckSchema = new Schema(
     {
-        title: { type: String, required: true },
-        body: { type: String, required: true },
-        amount: { type: Number, required: true },
-        ready: { type: Boolean, required: true },
+        name: { type: String, required: true },
+        description: { type: String, required: true },
         owner: {
             type: Schema.Types.ObjectID,
             ref: "User",
         },
+        cards: [cardSchema],
+        comments: [commentSchema],
     },
     { timestamps: true }
 );
 
 const Deck = model("Deck", deckSchema);
+// virtual to loop over card to build out object
+// using count
 
 /////////////////////////////////
 // Export our Model
