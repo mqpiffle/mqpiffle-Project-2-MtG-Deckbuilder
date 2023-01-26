@@ -99,7 +99,7 @@ router.put('/:id', (req, res) => {
 
     Deck.findByIdAndUpdate(deckId, req.body, { new: true })
         .then(deck => {
-            res.redirect(`/decks/${deck.id}`)
+            res.redirect(`/decks/${deck.id}/edit`)
         })
         .catch(error => {
             res.redirect(`/error?error=${error}`)

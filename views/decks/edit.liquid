@@ -1,48 +1,26 @@
 {% layout 'layout.liquid' %}
 {% block content %}
-  {% # need two elements: the FORM(left) and the CARDS(right) %}
   <div class="mtg-inflx-container mtg-display-width">
-    {% # FORM %}
+          
     {% # 'left' side of screen %}
     {% # DETAILS on top %}
     <div class="mtg-display-left">
-      <div class="mtg-form">
-        <form action="/decks/{{deck.id}}?_method=PUT" method="POST">
-          <fieldset>
-            <legend>
-              <h2>Edit Deck</h2>
-            </legend>
-            <div class="mtg-elem">
-              <label class="form-label">Deck Name:
-              </label>
-              <input
-                type="text"
-                name="name"
-                placeholder="{{ deck.name }}"
-                class="form-control">
-            </div>
-            <div class="mtg-elem">
-              <label class="form-label">Description:</label>
-              <textarea class="form-control" name="description" rows="12" cols="22" maxlength="100" placeholder="{{deck.description}}"></textarea>
-            </div>
-          </fieldset>
-          <div class="btn-container-inline">
-            <input
-              type="submit"
-              value="Save"
-              class="mtg-btn-p">
+        <h2>{{deck.name}}</h2>
+        <p>{{deck.description}}</p>
+      <div class="mtg-cards-list">
+        {% for card in deck.cards %}
+          <div class="mtg-cards-list__card">
+            <p>{{card.name}}</p>
+            <form action="/cards/delete/{{ deck.id }}/{{ card.id }}?_method=DELETE" method="POST">
+              <button type="submit" class="mtg-btn-tp">
+                <span class="material-symbols-outlined" style="color: var(--secondary-lt)">delete</span>
+              </button>
+            </form>
           </div>
-        </form>
-        <div class="mtg-card-list">
-          {% for card in deck.cards %}
-            <h4>{{card.name}}</h4>
-          {% endfor %}
-        </div>
+        {% endfor %}
       </div>
-      {% # chosen CARDS listed on the bottom %}
       {% # grid with one element (1fr) per row %}
     </div>
-    {% # CARDS grid %}
     <div class="mtg-display-right">
       {% # since only 100 cards may be pulled from the api at a time %}
       {% # set up a filter by color %}
@@ -77,7 +55,7 @@
       <div class="mtg-cards-grid">
       {% if cards.length > 0 %}
         {% for card in cards %}
-          <div class="mtg-card-add">
+          <div class="mtg-card-container">
             <img src="{{card.image}}" width="200"></img>
             <form action="/cards/{{ deck.id }}" method="POST">
               <input hidden name="name" value="{{card.name}}">

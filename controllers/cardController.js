@@ -24,6 +24,10 @@ router.post('/:deckId', (req, res) => {
     if (req.session.loggedIn) {
         Deck.findById(deckId)
             .then(deck => {
+                // TODO if the card already exists in cards
+                // add one to the count
+
+                // else
                 // push the card into the array and save the document
                 deck.cards.push(theCard)
                 return deck.save()
@@ -43,6 +47,33 @@ router.post('/:deckId', (req, res) => {
             `/error?error=You%20Are%20not%20allowed%20to%20comment%20on%20this%20fruit`
         )
     }
+})
+
+// DELETE route -> cards/delete/<deckid>/<cardid>
+router.delete('/delete/:deckId/:cardId', (req, res) => {
+    const { deckId, cardId } = req.params
+    // get the deck
+    Deck.findById(deckId)
+        .then(deck => {
+            // get the card using the mongoose subdoc method .id()
+            const theCard = deck.cards.id(cardId)
+            // make sure user is logged in
+            if (req.session.loggedIn) {
+                // .remove() is another mongoose subdoc method
+                theCard.remove()
+                deck.save()
+                res.redirect(`/decks/${deck.id}/edit`)
+            } else {
+                // if user is not logged in
+                res.redirect(
+                    `/error?error=You%20Are%20not%20allowed%20to%20delete%20this%20card`
+                )
+            }
+        })
+        .catch(err => {
+            console.log(err)
+            res.redirect(`/error?error=${err}`)
+        })
 })
 // *********** *********** *********** //
 //  Export Router                      //

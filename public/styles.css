@@ -14,15 +14,16 @@
 
 :root {
     --primary: hsl(201, 98%, 36%);
-    --primary-lt: hsl(201, 68%, 53%);
+    --primary-lt: hsl(201, 68%, 45%);
     --primary-dk: hsl(201, 98%, 18%);
     --secondary: hsl(335, 98%, 36%);
-    --secondary-lt: hsl(335, 68%, 53%);
+    --secondary-lt: hsl(335, 68%, 45%);
     --secondary-dk: hsl(335, 98%, 18%);
     /* --secondary-lt: hsl(154, 63%, 58%);
     --secondary: hsl(154, 74%, 35%);
     --secondary-dk: hsl(154, 58%, 25%); */
-    --tertiary: hsl(55, 60%, 40%);
+    --tertiary: hsl(55, 60%, 36%);
+    --tertiary-lt: hsl(55, 42%, 45%);
     --tertiary-dk: hsl(55, 70%, 29%);
     --gray-90: hsl(0 0% 90%);
     --gray-80: hsl(0 0% 80%);
@@ -35,6 +36,16 @@
     --gray-10: hsl(0 0% 10%);
     --gray-0: hsl(0 0% 0%);
     --shadow: hsl(0 0% 0% / 0.7);
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
 }
 
 body {
@@ -232,20 +243,30 @@ fieldset {
     transition: background-color 200ms ease;
 }
 
+.mtg-btn-tp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+}
+
 .mtg-btn-p:hover {
-    background-color: var(--primary-dk);
+    background-color: var(--primary-lt);
 }
 
 .mtg-btn-sm-p:hover {
-    background-color: var(--primary-dk);
+    background-color: var(--primary-lt);
 }
 
 .mtg-btn-s:hover {
-    background-color: var(--secondary-dk);
+    background-color: var(--secondary-lt);
 }
 
 .mtg-btn-t:hover {
-    background-color: var(--tertiary-dk);
+    background-color: var(--tertiary-lt);
 }
 
 /* DECK create, view, edit pages */
@@ -257,12 +278,6 @@ fieldset {
     justify-content: start;
 }
 
-.mtg-cards-list {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 0.25rem;
-}
-
 .mtg-cards-grid {
     margin-inline: auto;
     display: grid;
@@ -271,8 +286,12 @@ fieldset {
 }
 
 .mtg-display-left {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
     width: fit-content;
     padding-inline: 1rem;
+    flex-shrink: 0;
 }
 
 .mtg-display-right {
@@ -302,11 +321,29 @@ fieldset {
     border-radius: 0.25rem;
 }
 
-.mtg-card-add {
+.mtg-card-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 0.5rem;
     padding-bottom: 0.5rem;
     border: 1px solid var(--gray-50);
+}
+
+.mtg-cards-list {
+    padding-top: 1rem;
+    border-top: 3px solid var(--gray-20);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.375rem;
+}
+
+.mtg-cards-list__card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1.125rem;
+    padding: 0.125rem 0.25rem;
+    background-color: var(--gray-20);
+    border-radius: 0.25rem;
 }
