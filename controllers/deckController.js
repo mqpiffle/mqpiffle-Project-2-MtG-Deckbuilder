@@ -57,16 +57,24 @@ router.get('/new', (req, res) => {
 
 // create -> POST route that actually calls the db and makes a new document
 router.post('/', (req, res) => {
-    console.log
     req.body.owner = req.session.userId
-    Deck.create(req.body)
-        .then(deck => {
-            console.log('this was returned from create', deck)
-            res.redirect('/decks')
-        })
-        .catch(error => {
-            res.redirect(`/error?error=${error}`)
-        })
+    const thePath = req.body.returnPath
+    if (thePath.back) {
+        res.redirect('/decks')
+    } else {
+        Deck.create(req.body)
+            .then(deck => {
+                console.log('this was returned from create', deck)
+                if (thePath == 'allDecks') {
+                    res.redirect('/decks')
+                } else if (thePath == 'addCards') {
+                    res.redirect(`/decks/${deck.id}/edit`)
+                }
+            })
+            .catch(error => {
+                res.redirect(`/error?error=${error}`)
+            })
+    }
 })
 
 // edit route -> GET that takes us to the edit form view

@@ -19,28 +19,35 @@ router.post('/:deckId', (req, res) => {
     const deckId = req.params.deckId
     // save the card body for later
     const theCard = req.body
-    console.log(theCard)
+    console.log('theCard.name: ', theCard.name)
     // extra layer of protection from not-loggin-in intruders
     if (req.session.loggedIn) {
         Deck.findById(deckId)
             .then(deck => {
+                const cards = deck.cards
+                console.log('cards[0].name is: ', cards[0].name)
                 // TODO if the card already exists in cards
-                if (deck.cards.length > 0) {
-                    for (let i = 0; i < deck.cards.length; i++) {
-                        if (deck.cards.name === theCard.name) {
-                            // return to the edit page
-                            res.redirect(`/decks/${deck.id}/edit`)
-                        }
+                if (cards.length > 0) {
+                    if (cards.some(card => card.name === theCard.name)) {
+                        return deck.save()
+                    } else {
+                        console.log('ooga baoonga')
+                        // automatically add to array and return to page
+                        deck.cards.push(theCard)
+                        return deck.save()
                     }
+                    // else
+                    // push the card into the array and save the document
+                } else {
+                    console.log('ooga baoonga')
+                    // automatically add to array and return to page
+                    deck.cards.push(theCard)
+                    return deck.save()
                 }
-                // else
-                // push the card into the array and save the document
-                deck.cards.push(theCard)
-                return deck.save()
             })
-            .then(deck => {
+            .then(() => {
                 // then redirect back to the edit page
-                res.redirect(`/decks/${deck.id}/edit`)
+                res.redirect(`/decks/${deckId}/edit`)
             })
             .catch(err => {
                 console.log(err)
