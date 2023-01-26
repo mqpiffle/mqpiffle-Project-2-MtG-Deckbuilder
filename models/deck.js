@@ -1,13 +1,13 @@
 // import dependencies
-const mongoose = require("../utils/connection");
-const commentSchema = require("./comment");
-const cardSchema = require("./card");
+const mongoose = require('../utils/connection')
+const commentSchema = require('./comment')
+const cardSchema = require('./card')
 
 // import user model for populate
-const User = require("./user");
+const User = require('./user')
 
 // destructure the schema and model constructors from mongoose
-const { Schema, model } = mongoose;
+const { Schema, model } = mongoose
 
 const deckSchema = new Schema(
     {
@@ -15,19 +15,36 @@ const deckSchema = new Schema(
         description: { type: String, required: true },
         owner: {
             type: Schema.Types.ObjectID,
-            ref: "User",
+            ref: 'User',
         },
         cards: [cardSchema],
         comments: [commentSchema],
     },
-    { timestamps: true }
-);
+    {
+        timestamps: true,
+        toObject: {
+            virtuals: true,
+        },
+        toJSON: {
+            virtuals: true,
+        },
+    }
+)
 
-const Deck = model("Deck", deckSchema);
+// deckSchema
+//     .virtual('addCard')
+//     .get(() => {
+//         return `${this.cards.count}`
+//     })
+//     .set(value => {
+//         this.set(cards.count + value)
+//     })
+
+const Deck = model('Deck', deckSchema)
 // virtual to loop over card to build out object
 // using count
 
 /////////////////////////////////
 // Export our Model
 /////////////////////////////////
-module.exports = Deck;
+module.exports = Deck

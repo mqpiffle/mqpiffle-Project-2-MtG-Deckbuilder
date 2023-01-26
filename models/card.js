@@ -11,7 +11,7 @@ const cardSchema = new Schema(
         name: { type: String, required: true },
         mtgId: { type: String, required: true },
         image: { type: String, required: true },
-        count: { type: Number, required: true },
+        count: { type: Number, required: true, min: 1 },
     },
     { timestamps: true }
 )

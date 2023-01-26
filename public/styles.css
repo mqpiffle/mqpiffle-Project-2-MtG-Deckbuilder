@@ -347,3 +347,9 @@ fieldset {
     background-color: var(--gray-20);
     border-radius: 0.25rem;
 }
+
+.mtg-cards-list__card__box {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+}

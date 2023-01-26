@@ -25,8 +25,14 @@ router.post('/:deckId', (req, res) => {
         Deck.findById(deckId)
             .then(deck => {
                 // TODO if the card already exists in cards
-                // add one to the count
-
+                if (deck.cards.length > 0) {
+                    for (let i = 0; i < deck.cards.length; i++) {
+                        if (deck.cards.name === theCard.name) {
+                            // return to the edit page
+                            res.redirect(`/decks/${deck.id}/edit`)
+                        }
+                    }
+                }
                 // else
                 // push the card into the array and save the document
                 deck.cards.push(theCard)
@@ -47,6 +53,35 @@ router.post('/:deckId', (req, res) => {
             `/error?error=You%20Are%20not%20allowed%20to%20comment%20on%20this%20fruit`
         )
     }
+})
+
+// UPDATE route -> cards/<deckId>
+router.put('/:deckId/:cardId', (req, res) => {
+    const { deckId, cardId } = req.params
+    const { adjustor } = req.body
+    console.log(adjustor)
+    Deck.findById(deckId)
+        .then(deck => {
+            const card = deck.cards.id(cardId)
+            console.log(card)
+            if (adjustor === 'add') {
+                card.count = card.count + 1
+            } else {
+                if (card.count == 1) {
+                    card.count = 1
+                } else {
+                    card.count = card.count - 1
+                }
+            }
+            console.log(`updated card: `, card)
+            return deck.save()
+        })
+        .then(deck => {
+            res.redirect(`/decks/${deck.id}/edit`)
+        })
+        .catch(error => {
+            res.redirect(`/error?error=${error}`)
+        })
 })
 
 // DELETE route -> cards/delete/<deckid>/<cardid>

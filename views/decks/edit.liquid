@@ -10,12 +10,27 @@
       <div class="mtg-cards-list">
         {% for card in deck.cards %}
           <div class="mtg-cards-list__card">
-            <p>{{card.name}}</p>
-            <form action="/cards/delete/{{ deck.id }}/{{ card.id }}?_method=DELETE" method="POST">
-              <button type="submit" class="mtg-btn-tp">
-                <span class="material-symbols-outlined" style="color: var(--secondary-lt)">delete</span>
-              </button>
-            </form>
+            <div class="mtg-cards-list__card__box">
+              <p>{{card.name}}</p>
+              <small>x{{card.count}}</small>
+            </div>
+            <div class="mtg-cards-list__card__box">
+              <form action="/cards/{{ deck.id }}/{{ card.id }}?_method=PUT" method="POST">
+                <button type="submit" name="adjustor" value="remove" class="mtg-btn-tp">
+                  <span class="material-symbols-outlined" style="color: var(--tertiary-lt)">remove</span>
+                </button>
+              </form>
+              <form action="/cards/{{ deck.id }}/{{ card.id }}?_method=PUT" method="POST">
+                <button type="submit" name="adjustor" value="add" class="mtg-btn-tp">
+                  <span class="material-symbols-outlined" style="color: var(--tertiary-lt)">add</span>
+                </button>
+              </form>
+              <form action="/cards/delete/{{ deck.id }}/{{ card.id }}?_method=DELETE" method="POST">
+                <button type="submit" class="mtg-btn-tp">
+                  <span class="material-symbols-outlined" style="color: var(--secondary-lt)">delete</span>
+                </button>
+              </form>
+            </div>
           </div>
         {% endfor %}
       </div>
