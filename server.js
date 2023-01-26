@@ -1,11 +1,12 @@
-////////////////////
-//  Dependencies  //
-////////////////////
+// *********** *********** *********** //
+//  Dependencies                       //
+// *********** *********** *********** //
 require('dotenv').config() // make env variables available
 const express = require('express')
 const middleware = require('./utils/middleware')
 const DeckRouter = require('./controllers/deckController')
 const UserRouter = require('./controllers/userController')
+const CardRouter = require('./controllers/cardController')
 const User = require('./models/user')
 // SEE MORE DEPENDENCIES IN ./utils/middleware.js
 // user and resource routes linked in ./utils/middleware.js
@@ -17,12 +18,13 @@ const app = require('liquid-express-views')(express())
 
 middleware(app)
 
-////////////////////
-//    Routes      //
-////////////////////
+// *********** *********** *********** //
+//  Routes                             //
+// *********** *********** *********** //
 
 app.use('/auth', UserRouter)
 app.use('/decks', DeckRouter)
+app.use('/cards', CardRouter)
 
 app.get('/', (req, res) => {
     const { username, userId, loggedIn } = req.session

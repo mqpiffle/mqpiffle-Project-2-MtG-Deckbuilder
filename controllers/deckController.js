@@ -37,6 +37,7 @@ router.get('/', (req, res) => {
 // index that shows only the user's examples
 router.get('/mine', (req, res) => {
     // destructure user info from req.session
+    const { username, userId, loggedIn } = req.session
     Deck.find({ owner: userId })
         .then(decks => {
             res.render('decks/index', { decks, ...req.session })
@@ -73,13 +74,15 @@ router.get('/:id/edit', async (req, res) => {
     // we need to get the id
     const deckId = req.params.id
     const card = await axios(`${process.env.MTG_URL}?set=4ED&random=true`)
-    // console.log(card.data)
+    // if a card is selected, push the data passed from the req.body
+    // into the cardArray to be displayed in the list
+
     // cards returns an object as data which includes one element
     // and array of cards
     // need to drill down into that array to access the properties needed
     cardData = card.data
     const cards = cardData.cards.map(card => {
-        return { image: card.imageUrl, id: card.id }
+        return { image: card.imageUrl, id: card.id, name: card.name }
     })
     Deck.findById(deckId)
         .then(deck => {
@@ -93,7 +96,6 @@ router.get('/:id/edit', async (req, res) => {
 // update route
 router.put('/:id', (req, res) => {
     const deckId = req.params.id
-    req.body.ready = req.body.ready === 'on' ? true : false
 
     Deck.findByIdAndUpdate(deckId, req.body, { new: true })
         .then(deck => {

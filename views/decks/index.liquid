@@ -11,6 +11,7 @@
               <h3 class="card-header">{{ deck.name }}</h5>
               <div class="card-body">
                 <h5>{{ deck.cards.length }} cards</h5>
+                <h6>owned by: {{ username }}</h6>
                 <p class="card-text">
                   {{ deck.description }}
                 </p>
@@ -30,8 +31,6 @@
                       View
                     </a>
                   {% endif %}
-                  {% # if user != owner display owner name %}
-
                 </div>
               </div>
             </div>
