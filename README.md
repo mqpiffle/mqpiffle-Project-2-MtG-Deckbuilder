@@ -8,21 +8,13 @@ MtG Deckbuilder allows a group of people to create a tournament style MtG deck f
 
 Create a collection of 'approved' cards pulled from the MtG api, then each user may build decks from those cards, giving their freinds the opportunity to troll them endlessly with comments.
 
-### Sprints
-
-#### Day One
-
-Basic styling objectives:
-
--   colors
--   fonts
-
 ### MVP
 
 -   user authentication and authorization, including signup, login, and log out
 -   create a collection of 'allowed' cards based on certain MtG releases. This will be haedcoded in the schema for mvp.
 -   users will be able to choose cards from the collection
 -   decks will just be another collection (not a competition style deck with dechbuilding rules)
+-   users view and/or comment on any collection, but may onle create and edit their own (and only if logged in)
 
 ### Stretch Goals
 

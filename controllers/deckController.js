@@ -26,7 +26,9 @@ router.use((req, res, next) => {
 // index ALL
 router.get('/', (req, res) => {
     Deck.find({})
+        .populate('owner', 'username')
         .then(decks => {
+            console.log(decks[0].totalCount)
             res.render('decks/index', { decks, ...req.session })
         })
         .catch(error => {
@@ -37,8 +39,9 @@ router.get('/', (req, res) => {
 // index that shows only the user's examples
 router.get('/mine', (req, res) => {
     // destructure user info from req.session
-    const { username, userId, loggedIn } = req.session
+    const { userId } = req.session
     Deck.find({ owner: userId })
+        .populate('owner', 'username')
         .then(decks => {
             res.render('decks/index', { decks, ...req.session })
         })
@@ -95,6 +98,19 @@ router.get('/:id/edit', async (req, res) => {
     Deck.findById(deckId)
         .then(deck => {
             res.render('decks/edit', { cards, deck, ...req.session })
+        })
+        .catch(error => {
+            res.redirect(`/error?error=${error}`)
+        })
+})
+
+// edit route -> GET that takes us to the edit form view
+router.get('/:id/edit-info', async (req, res) => {
+    // we need to get the id
+    const deckId = req.params.id
+    Deck.findById(deckId)
+        .then(deck => {
+            res.render('decks/edit-info', { deck, ...req.session })
         })
         .catch(error => {
             res.redirect(`/error?error=${error}`)

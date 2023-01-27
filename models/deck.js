@@ -22,6 +22,7 @@ const deckSchema = new Schema(
     },
     {
         timestamps: true,
+        virtuals: true,
         toObject: {
             virtuals: true,
         },
@@ -31,14 +32,9 @@ const deckSchema = new Schema(
     }
 )
 
-// deckSchema
-//     .virtual('addCard')
-//     .get(() => {
-//         return `${this.cards.count}`
-//     })
-//     .set(value => {
-//         this.set(cards.count + value)
-//     })
+deckSchema.virtual('totalCount').get(function () {
+    return this.cards.map(card => card.count).reduce((x, y) => x + y)
+})
 
 const Deck = model('Deck', deckSchema)
 // virtual to loop over card to build out object

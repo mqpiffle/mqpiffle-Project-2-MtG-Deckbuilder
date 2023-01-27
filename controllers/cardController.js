@@ -25,7 +25,6 @@ router.post('/:deckId', (req, res) => {
         Deck.findById(deckId)
             .then(deck => {
                 const cards = deck.cards
-                console.log('cards[0].name is: ', cards[0].name)
                 // TODO if the card already exists in cards
                 if (cards.length > 0) {
                     if (cards.some(card => card.name === theCard.name)) {

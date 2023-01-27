@@ -25,9 +25,10 @@
     --tertiary: hsl(55, 60%, 36%);
     --tertiary-lt: hsl(55, 42%, 45%);
     --tertiary-dk: hsl(55, 70%, 29%);
-    --gray-90: hsl(0 0% 90%);
-    --gray-80: hsl(0 0% 80%);
-    --gray-70: hsl(0 0% 70%);
+    --gray-100: hsl(225 20% 100%);
+    --gray-90: hsl(225 20% 90%);
+    --gray-80: hsl(225 20% 80%);
+    --gray-70: hsl(225 20% 70%);
     --gray-60: hsl(0 0% 60%);
     --gray-50: hsl(0 0% 50%);
     --gray-40: hsl(0 0% 40%);
@@ -48,21 +49,28 @@ h6 {
     margin: 0;
 }
 
-html {
+/* html {
     position: relative;
-}
+} */
 
 body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
     font-family: 'Inter', sans-serif;
     font-size: 16px;
-    color: var(--gray-90);
-    background-color: var(--gray-10);
+    color: var(--gray-20);
+    background-color: var(--gray-80);
+}
+
+main {
+    flex: 1;
 }
 
 nav {
     margin: 0;
     color: var(--gray-10);
-    background-color: var(--gray-80);
+    background-color: var(--gray-70);
 }
 
 a {
@@ -109,7 +117,7 @@ fieldset {
     color: transparent;
     border-radius: 0.25rem;
     box-shadow: 3px 3px var(--primary-dk), 6px 6px var(--tertiary),
-        9px 9px var(--secondary-dk), 12px 12px 18px 7px var(--shadow);
+        9px 9px var(--secondary-dk), 12px 12px 15px 3px var(--shadow);
     transition: box-shadow 330ms ease;
 }
 
@@ -273,6 +281,12 @@ fieldset {
     background-color: var(--tertiary-lt);
 }
 
+/* Icons */
+
+.mtg-icon-lg {
+    font-size: 48px;
+}
+
 /* DECK create, view, edit pages */
 
 .mtg-inflx-container {
@@ -286,7 +300,7 @@ fieldset {
     margin-inline: auto;
     display: grid;
     grid-template-columns: repeat(auto-fit, 200px);
-    gap: 0.5rem;
+    gap: 1rem;
 }
 
 .mtg-display-left {
@@ -329,7 +343,12 @@ fieldset {
     align-items: center;
     gap: 0.5rem;
     padding-bottom: 0.5rem;
-    border: 1px solid var(--gray-50);
+    background-color: var(--gray-100);
+    box-shadow: 3px 3px 7px var(--shadow);
+}
+
+.mtg-card-container img {
+    margin: 0.5rem;
 }
 
 .mtg-cards-list {
@@ -347,7 +366,7 @@ fieldset {
     justify-content: space-between;
     font-size: 1.125rem;
     padding: 0.125rem 0.25rem;
-    background-color: var(--gray-20);
+    background-color: var(--gray-70);
     border-radius: 0.25rem;
 }
 

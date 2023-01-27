@@ -10,25 +10,34 @@
             <div class="mtg-deck-card">
               <h3 class="card-header">{{ deck.name }}</h5>
               <div class="card-body">
-                <h5>{{ deck.cards.length }} cards</h5>
-                <h6>owned by: {{ username }}</h6>
+                <h5>
+                  {{ deck.totalCount }} cards</h5>
+                <h6>owned by: {{ deck.owner.username }}</h6>
                 <p class="card-text">
                   {{ deck.description }}
                 </p>
                 <div class="btn-container-inline">
-                  {% if loggedIn %}
-                    <a href="/decks/{{ deck.id }}/edit" class="mtg-btn-t">
-                      Edit
+                  {% if deck.owner == userId %}
+                    <a href="/decks/{{ deck.id }}/edit-info">
+                      <button type="submit" class="mtg-btn-tp">
+                        <span class="material-symbols-outlined" style="color: var(--gray-90)">edit</span>
+                      </button>
+                    </a>
+                    <a href="/decks/{{ deck.id }}/edit">
+                      <button type="submit" class="mtg-btn-tp">
+                        <span class="material-symbols-outlined" style="color: var(--gray-90)">tune</span>
+                      </button>
                     </a>
                     <form action="/decks/{{ deck.id }}?_method=DELETE" method="POST">
-                      <input
-                        type="submit"
-                        class="mtg-btn-s"
-                        value="DELETE">
+                      <button type="submit" class="mtg-btn-tp">
+                        <span class="material-symbols-outlined" style="color: var(--gray-90)">delete</span>
+                      </button>
                     </form>
                   {% else %}
-                    <a href="/deck/{{ deck.id }}" class="mtg-btn-t">
-                      View
+                    <a href="/decks/{{ deck.id }}/edit-info">
+                      <button type="submit" class="mtg-btn-tp">
+                        <span class="material-symbols-outlined" style="color: var(--gray-90)">visibility</span>
+                      </button>
                     </a>
                   {% endif %}
                 </div>
