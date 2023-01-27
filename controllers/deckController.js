@@ -28,7 +28,6 @@ router.get('/', (req, res) => {
     Deck.find({})
         .populate('owner', 'username')
         .then(decks => {
-            console.log(decks[0].totalCount)
             res.render('decks/index', { decks, ...req.session })
         })
         .catch(error => {

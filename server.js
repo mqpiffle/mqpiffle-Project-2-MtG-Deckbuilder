@@ -7,6 +7,7 @@ const middleware = require('./utils/middleware')
 const DeckRouter = require('./controllers/deckController')
 const UserRouter = require('./controllers/userController')
 const CardRouter = require('./controllers/cardController')
+const CommentRouter = require('./controllers/commentController')
 const User = require('./models/user')
 // SEE MORE DEPENDENCIES IN ./utils/middleware.js
 // user and resource routes linked in ./utils/middleware.js
@@ -25,6 +26,7 @@ middleware(app)
 app.use('/auth', UserRouter)
 app.use('/decks', DeckRouter)
 app.use('/cards', CardRouter)
+app.use('/comment', CommentRouter)
 
 app.get('/', (req, res) => {
     const { username, userId, loggedIn } = req.session

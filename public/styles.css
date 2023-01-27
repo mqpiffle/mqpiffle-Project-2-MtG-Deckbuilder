@@ -2,7 +2,7 @@
 /* Righteous display & Inter sans */
 /* @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Righteous&display=swap"); */
 /* Fredericka the Great display & Inter sans */
-@import url('https://fonts.googleapis.com/css2?family=Fredericka+the+Great&family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Special+Elite&family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 *,
 *:before,
@@ -25,10 +25,10 @@
     --tertiary: hsl(55, 60%, 36%);
     --tertiary-lt: hsl(55, 42%, 45%);
     --tertiary-dk: hsl(55, 70%, 29%);
-    --gray-100: hsl(225 20% 100%);
-    --gray-90: hsl(225 20% 90%);
-    --gray-80: hsl(225 20% 80%);
-    --gray-70: hsl(225 20% 70%);
+    --gray-100: hsl(0 0% 100%);
+    --gray-90: hsl(0 0% 90%);
+    --gray-80: hsl(0 0% 80%);
+    --gray-70: hsl(0 0% 70%);
     --gray-60: hsl(0 0% 60%);
     --gray-50: hsl(0 0% 50%);
     --gray-40: hsl(0 0% 40%);
@@ -37,6 +37,7 @@
     --gray-10: hsl(0 0% 10%);
     --gray-0: hsl(0 0% 0%);
     --shadow: hsl(0 0% 0% / 0.7);
+    --shadow-lt: hsl(0 0% 0% / 0.35);
 }
 
 p,
@@ -57,7 +58,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Garamond', serif;
     font-size: 16px;
     color: var(--gray-20);
     background-color: var(--gray-80);
@@ -93,6 +94,8 @@ fieldset {
     width: 100%;
 }
 
+/* NAVBAR styles */
+
 .mtg-nav-container {
     width: 100%;
     padding: 1.25rem 0.5rem;
@@ -102,45 +105,28 @@ fieldset {
 }
 
 .mtg-brand {
-    font-family: 'Fredericka the Great', cursive;
+    font-family: 'Special Elite', serif;
     font-size: clamp(1.5rem, calc(1rem + 2vw), 3rem);
     margin: 1rem 0;
-    padding: 0.5rem 1rem;
+    padding: 1rem 1rem 0;
     background-image: linear-gradient(
         90deg,
-        var(--primary-dk),
-        var(--tertiary-dk),
-        var(--secondary-dk)
+        var(--primary),
+        var(--tertiary),
+        var(--secondary)
     );
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
     border-radius: 0.25rem;
-    box-shadow: 3px 3px var(--primary-dk), 6px 6px var(--tertiary),
-        9px 9px var(--secondary-dk), 12px 12px 15px 3px var(--shadow);
+    box-shadow: 3px 3px var(--primary), 6px 6px var(--tertiary),
+        9px 9px var(--secondary), 12px 12px 15px 3px var(--shadow);
     transition: box-shadow 330ms ease;
 }
 
 .mtg-brand:hover {
     box-shadow: 3px 3px var(--primary-dk), 6px 6px var(--tertiary),
         9px 9px var(--secondary-dk), 12px 12px 21px 11px var(--shadow);
-}
-
-.btn-container-inline {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;
-    gap: 0.5rem;
-}
-
-.btn-container-block {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;
-    gap: 1rem;
 }
 
 .nav-btn {
@@ -154,6 +140,8 @@ fieldset {
 .nav-btn:hover {
     background-color: var(--tertiary);
 }
+
+/* MAIN styles */
 
 .mtg-form {
     display: flex;
@@ -180,15 +168,23 @@ fieldset {
     width: min(65ch, 99%);
 }
 
+.mtg-mt-2 {
+    margin-top: 2rem;
+}
+
+.mtg-text-center {
+    text-align: center;
+}
+
 .mtg-display-width {
     width: min(1920px, 99%);
 }
 
 .mtg-brand-landing {
-    font-family: 'Fredericka the Great', cursive;
+    font-family: 'Special Elite', cursive;
     font-size: clamp(1.75rem, calc(1.75rem + 2vw), 4rem);
     margin: 1rem 0;
-    padding: 0.5rem 1rem;
+    padding: 1rem 1rem 0;
     background-image: linear-gradient(
         90deg,
         var(--primary),
@@ -215,13 +211,33 @@ fieldset {
 
 /* BUTTONS */
 
+.btn-container-inline {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    gap: 0.5rem;
+}
+
+.btn-container-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    gap: 1rem;
+}
+
 .mtg-btn-p {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
     border: none;
     font-size: 1.25rem;
     font-weight: 600;
     padding: 0.5rem 1rem;
     color: var(--gray-90);
-    background-color: var(--primary);
+    background-color: var(--primary-dk);
     transition: background-color 200ms ease;
 }
 
@@ -231,7 +247,7 @@ fieldset {
     font-weight: 400;
     padding: 0.25rem 1rem;
     color: var(--gray-90);
-    background-color: var(--primary);
+    background-color: var(--primary-dk);
     transition: background-color 200ms ease;
 }
 
@@ -241,7 +257,7 @@ fieldset {
     font-weight: 600;
     padding: 0.5rem 1rem;
     color: var(--gray-90);
-    background-color: var(--secondary);
+    background-color: var(--secondary-dk);
     transition: background-color 200ms ease;
 }
 
@@ -251,7 +267,7 @@ fieldset {
     font-weight: 600;
     padding: 0.5rem 1rem;
     color: var(--gray-10);
-    background-color: var(--tertiary);
+    background-color: var(--tertiary-dk);
     transition: background-color 200ms ease;
 }
 
@@ -266,25 +282,28 @@ fieldset {
 }
 
 .mtg-btn-p:hover {
-    background-color: var(--primary-lt);
+    background-color: var(--primary);
 }
 
 .mtg-btn-sm-p:hover {
-    background-color: var(--primary-lt);
+    background-color: var(--primary);
 }
 
 .mtg-btn-s:hover {
-    background-color: var(--secondary-lt);
+    background-color: var(--secondary);
 }
 
 .mtg-btn-t:hover {
-    background-color: var(--tertiary-lt);
+    background-color: var(--tertiary);
 }
 
 /* Icons */
-
-.mtg-icon-lg {
-    font-size: 48px;
+.icon-container-inline {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    gap: 1rem;
 }
 
 /* DECK create, view, edit pages */
@@ -299,7 +318,7 @@ fieldset {
 .mtg-cards-grid {
     margin-inline: auto;
     display: grid;
-    grid-template-columns: repeat(auto-fit, 200px);
+    grid-template-columns: repeat(auto-fit, 220px);
     gap: 1rem;
 }
 
@@ -332,9 +351,15 @@ fieldset {
     flex-direction: column;
     padding: 0.5rem;
     gap: 0.5rem;
-    color: var(--gray-90);
-    background-color: var(--gray-20);
-    border-radius: 0.25rem;
+    color: var(--gray-20);
+    background-color: var(--gray-100);
+    border-radius: 0.5rem;
+    box-shadow: 3px 3px 7px var(--shadow-lt);
+    transition: box-shadow 110ms ease;
+}
+
+.mtg-deck-card:hover {
+    box-shadow: 3px 3px 11px 3px var(--shadow);
 }
 
 .mtg-card-container {
@@ -344,11 +369,23 @@ fieldset {
     gap: 0.5rem;
     padding-bottom: 0.5rem;
     background-color: var(--gray-100);
-    box-shadow: 3px 3px 7px var(--shadow);
+    border-radius: 0.5rem;
+    box-shadow: 3px 3px 7px var(--shadow-lt);
+    transition: box-shadow 110ms ease;
 }
 
 .mtg-card-container img {
+    opacity: 0.85;
     margin: 0.5rem;
+    transition: opacity 110ms ease;
+}
+
+.mtg-card-container:hover {
+    box-shadow: 3px 3px 11px 3px var(--shadow);
+}
+
+.mtg-card-container:hover img {
+    opacity: 1;
 }
 
 .mtg-cards-list {

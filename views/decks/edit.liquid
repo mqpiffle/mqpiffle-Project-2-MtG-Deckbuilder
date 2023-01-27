@@ -71,14 +71,14 @@
       {% if cards.length > 0 %}
         {% for card in cards %}
           <div class="mtg-card-container">
-            <img src="{{card.image}}" width="175"></img>
+            <img src="{{card.image}}" width="200"></img>
             <form action="/cards/{{ deck.id }}" method="POST">
               <input hidden name="name" value="{{card.name}}">
               <input hidden name="mtgId" value="{{card.id}}">
               <input hidden name="image" value="{{card.image}}">
               <input hidden name="count" value="1">
               <button type="submit" class="mtg-btn-tp">
-                <span class="material-symbols-outlined mtg-icon-lg" style="color: var(--primary-lt); font-size: 48px">library_add</span>
+                <span class="material-symbols-outlined" style="color: var(--primary-dk); font-size: 48px">library_add</span>
               </button>
             </form>
           </div>

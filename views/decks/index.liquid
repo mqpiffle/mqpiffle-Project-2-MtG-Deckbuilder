@@ -1,10 +1,10 @@
 {% layout 'layout.liquid' %}
 {% block content %}
+  <h2>Deck Dashboard</h2>
   <div class="mtg-std-container mtg-display-width">
     <a class="mtg-btn-p" href="/decks/new">Create New Deck</a>
     {% if decks.length > 0 %}
       <div class="mtg-grid-container">
-        <h2>All Decks</h2>
         <div class="mtg-deck-grid">
           {% for deck in decks %}
             <div class="mtg-deck-card">
@@ -16,29 +16,29 @@
                 <p class="card-text">
                   {{ deck.description }}
                 </p>
-                <div class="btn-container-inline">
+                <div class="icon-container-inline">
                   {% if deck.owner == userId %}
                     <a href="/decks/{{ deck.id }}/edit-info">
                       <button type="submit" class="mtg-btn-tp">
-                        <span class="material-symbols-outlined" style="color: var(--gray-90)">edit</span>
+                        <span class="material-symbols-outlined" style="color: var(--tertiary-dk); font-size: 36px">edit</span>
                       </button>
                     </a>
                     <a href="/decks/{{ deck.id }}/edit">
                       <button type="submit" class="mtg-btn-tp">
-                        <span class="material-symbols-outlined" style="color: var(--gray-90)">tune</span>
+                        <span class="material-symbols-outlined" style="color: var(--tertiary-dk); font-size: 36px">tune</span>
                       </button>
                     </a>
                     <form action="/decks/{{ deck.id }}?_method=DELETE" method="POST">
                       <button type="submit" class="mtg-btn-tp">
-                        <span class="material-symbols-outlined" style="color: var(--gray-90)">delete</span>
+                        <span class="material-symbols-outlined" style="color: var(--secondary-dk); font-size: 36px">delete</span>
                       </button>
                     </form>
                   {% else %}
-                    <a href="/decks/{{ deck.id }}/edit-info">
+                    <form action="/decks/{{ deck.id }}" method="GET">
                       <button type="submit" class="mtg-btn-tp">
-                        <span class="material-symbols-outlined" style="color: var(--gray-90)">visibility</span>
+                        <span class="material-symbols-outlined mtg-icon-md" style="color: var(--primary-dk); font-size: 36px">visibility</span>
                       </button>
-                    </a>
+                    </form>
                   {% endif %}
                 </div>
               </div>

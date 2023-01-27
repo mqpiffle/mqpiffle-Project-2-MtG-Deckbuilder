@@ -30,7 +30,6 @@ router.post('/:deckId', (req, res) => {
                     if (cards.some(card => card.name === theCard.name)) {
                         return deck.save()
                     } else {
-                        console.log('ooga baoonga')
                         // automatically add to array and return to page
                         deck.cards.push(theCard)
                         return deck.save()
@@ -38,7 +37,6 @@ router.post('/:deckId', (req, res) => {
                     // else
                     // push the card into the array and save the document
                 } else {
-                    console.log('ooga baoonga')
                     // automatically add to array and return to page
                     deck.cards.push(theCard)
                     return deck.save()
@@ -116,6 +114,7 @@ router.delete('/delete/:deckId/:cardId', (req, res) => {
             res.redirect(`/error?error=${err}`)
         })
 })
+
 // *********** *********** *********** //
 //  Export Router                      //
 // *********** *********** *********** //

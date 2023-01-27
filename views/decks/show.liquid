@@ -1,26 +1,54 @@
 {% layout 'layout.liquid' %}
 {% block content %}
-<div class="container-md">
-    <article>
-        <h2>
-            {{ example.title }} -
-            {% if example.ready %}
-            Ready
-            {% else %}
-            Not Ready
-            {%endif%}
-        </h2>
-        <h3>Amount: {{ example.amount }}</h3>
-        <h6>Body: {{ example.body }}</h6>
-        {% if example.owner == userId %}
-        <div class="btn-group">
-
-            <a href="/examples/{{ example.id }}/edit" class="btn btn-primary">Edit</a>
-            <form action="/examples/{{ example.id }}?_method=DELETE" method="POST">
-                <input type="submit" value="Delete" class="btn btn-danger">
-            </form>
+  <div class="mtg-std-container mtg-display-width">
+    {% # TITLE and DESCRIPTION %}
+    <div class="mtg-text-width mtg-text-center">
+      <h2 class="mtg-elem">{{ deck.name }}</h2>
+      <p class="mtg-elem">{{ deck.description }}</p>
+    </div>
+    {% # CARDS GRID %}
+    <div class="mtg-cards-grid mtg-display-width mtg-mt-2">
+      {% for card in deck.cards %}
+        <div class="mtg-deck-card">
+          <img src={{ card.image }} width="200">
+          <h3>x{{ card.count }}</h3>
         </div>
-        {% endif %}
-    </article>
-</div>
+      {% endfor %}
+    </div>
+    {% # COMMENTS %}
+    <div class="mtg-mt-2 mtg-std-container mtg-text-width">
+      <p class="mtg-elem">{{ deck.comments.length }} comments</p>
+      {% if deck.comments.length > 0 %}
+        <div>
+          {% for comm in deck.comments %}
+            {% render '../comment.liquid', comm: comm, userId: userId, deck: deck %}
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+    {% if loggedIn %}
+      <div>
+        <form
+          action="/comments/{{ deck.id }}"
+          method="POST"
+          class="mtg-form">
+          <label class="form-label">add comment:</label>
+          <textarea
+            class="form-control"
+            name="comment"
+            rows="12"
+            cols="65"
+            maxlength="330"></textarea>
+          <button type="submit" class="mtg-btn-p">
+            <span class="material-symbols-outlined" style="color: var(--gray-80)">done</span>
+            <span>Submit Comment</span>
+          </button>
+        </form>
+      </div>
+    {% else %}
+      <div>
+        <p>Please sign in to leave a comment.</p>
+      </div>
+    {% endif %}
+  </div>
 {% endblock %}
