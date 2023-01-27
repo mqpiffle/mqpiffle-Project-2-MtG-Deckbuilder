@@ -15,9 +15,11 @@ const router = express.Router()
 
 router.post('/:deckId', (req, res) => {
     const { deckId } = req.params
+
     if (req.session.loggedIn) {
         req.body.author = req.session.userId
         const theComment = req.body
+        console.log(theComment)
         Deck.findById(deckId)
             .then(deck => {
                 deck.comments.push(theComment)
@@ -37,11 +39,11 @@ router.post('/:deckId', (req, res) => {
     }
 })
 
-router.delete('delete/:deckId/:commentId', (req, res) => {
-    const { deckId, commentId } = req.params
+router.delete('/delete/:deckId/:commId', (req, res) => {
+    const { deckId, commId } = req.params
     Deck.findById(deckId)
         .then(deck => {
-            const theComment = deck.comments.id(commentId)
+            const theComment = deck.comments.id(commId)
             if (req.session.loggedIn) {
                 if (theComment.author == req.session.userId) {
                     theComment.remove()

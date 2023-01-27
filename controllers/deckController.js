@@ -27,6 +27,7 @@ router.use((req, res, next) => {
 router.get('/', (req, res) => {
     Deck.find({})
         .populate('owner', 'username')
+        .populate('comments.author', 'username')
         .then(decks => {
             res.render('decks/index', { decks, ...req.session })
         })
@@ -41,6 +42,7 @@ router.get('/mine', (req, res) => {
     const { userId } = req.session
     Deck.find({ owner: userId })
         .populate('owner', 'username')
+        .populate('comments.author', 'username')
         .then(decks => {
             res.render('decks/index', { decks, ...req.session })
         })
@@ -131,11 +133,11 @@ router.put('/:id', (req, res) => {
 
 // show route
 router.get('/:id', (req, res) => {
-    const deckId = req.params.id
-    Deck.findById(deckId)
+    const id = req.params.id
+    Deck.findById(id)
+        .populate('comments.author', 'username')
         .then(deck => {
-            const { username, loggedIn, userId } = req.session
-            res.render('decks/show', { deck, username, loggedIn, userId })
+            res.render('decks/show', { deck, ...req.session })
         })
         .catch(error => {
             res.redirect(`/error?error=${error}`)

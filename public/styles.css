@@ -374,6 +374,32 @@ fieldset {
     transition: box-shadow 110ms ease;
 }
 
+.mtg-comment-card {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    background-color: pink;
+    border-radius: 0.5rem;
+    box-shadow: 3px 3px 7px var(--shadow-lt);
+    transition: box-shadow 110ms ease;
+}
+
+.mtg-comment-hdr {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+}
+
+.mtg-comm-form-inputs {
+    width: 100%;
+}
+
 .mtg-card-container img {
     opacity: 0.85;
     margin: 0.5rem;

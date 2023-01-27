@@ -26,7 +26,7 @@ middleware(app)
 app.use('/auth', UserRouter)
 app.use('/decks', DeckRouter)
 app.use('/cards', CardRouter)
-app.use('/comment', CommentRouter)
+app.use('/comments', CommentRouter)
 
 app.get('/', (req, res) => {
     const { username, userId, loggedIn } = req.session

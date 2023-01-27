@@ -1,0 +1,16 @@
+{% block content %}
+  <div class="mtg-comment-card">
+    <div class="mtg-comment-hdr">
+      <p>{{ comm.author.username }}</p>
+      {% if comm.author == userId %}
+        <form action="/comments/delete/{{ deck.id }}/{{ comm.id }}?_method=DELETE" method="POST">
+          <button type="submit" class="mtg-btn-tp">
+            <span class="material-symbols-outlined" style="color: var(--secondary)">delete</span>
+          </button>
+        </form>
+      {% endif %}
+    </div>
+    <h3>{{ comm.heading }}</h3>
+    <p>{{ comm.note }}</p>
+  </div>
+{% endblock %}

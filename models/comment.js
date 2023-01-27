@@ -1,25 +1,26 @@
 // import dependencies
-const mongoose = require("../utils/connection");
+const mongoose = require('../utils/connection')
 
 // import user model for populate
-const User = require("./user");
+const User = require('./user')
 
 // destructure the schema and model constructors from mongoose
-const { Schema } = mongoose;
+const { Schema } = mongoose
 
 const commentSchema = new Schema(
     {
         heading: { type: String, required: true },
-        body: { type: String, required: true },
-        owner: {
+        note: { type: String, required: true },
+        author: {
             type: Schema.Types.ObjectID,
-            ref: "User",
+            ref: 'User',
+            required: true,
         },
     },
     { timestamps: true }
-);
+)
 
 /////////////////////////////////
 // Export our Model
 /////////////////////////////////
-module.exports = commentSchema;
+module.exports = commentSchema
