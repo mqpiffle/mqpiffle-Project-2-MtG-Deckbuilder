@@ -1,24 +1,39 @@
 {% block content %}
+  <a href="/" >
+    <h1 class="mtg-brand">MtG Deckbuilder</h1>
+  </a>
+  <button class="mtg-nav-toggle mtg-btn-tp" aria-controls="mtg-nav" aria-expanded="false">
+    <span class="material-symbols-outlined" style="color: var(--gray-10); font-size: 36px">menu</span>
+  </button>
   <nav>
-    <div class="mtg-nav-container">
-      <a href="/" class="navbar-brand">
-        <h1 class="mtg-brand">MtG Deckbuilder</h1>
-      </a>
+    <ul id="mtg-nav" data-visible="false" class="mtg-nav">
       {% if loggedIn %}
-        <a href="/decks/mine" class="nav-btn">Hello {{ username }}
-        </a>
+        <li>
+          <a href="/decks/mine" class="nav-btn">Hello {{ username }}</a>
+        </li>
       {% endif %}
-      <div class="btn-container-inline">
-        {% if loggedIn %}
-          <a class="nav-btn" href="/decks">View Cards</a>
-          <a class="nav-btn" href="/decks/">All Decks</a>
-          <a class="nav-btn" href="/decks/mine">My Decks</a>
-          <a class="nav-btn" href="/auth/logout">Log Out</a>
-        {% else %}
-          <a class="nav-btn" href="/auth/signup">Sign Up</a>
-          <a class="nav-btn" href="/auth/login">Sign In</a>
-        {% endif %}
-      </div>
+          {% if loggedIn %}
+            <li>
+              <a class="nav-btn" href="/decks">View Cards</a>
+            </li>
+            <li>
+              <a class="nav-btn" href="/decks/">All Decks</a>
+            </li>
+            <li>
+              <a class="nav-btn" href="/decks/mine">My Decks</a>
+            </li>
+            <li>
+              <a class="nav-btn" href="/auth/logout">Log Out</a>
+            </li>
+          {% else %}
+            <li>
+              <a class="nav-btn" href="/auth/signup">Sign Up</a>
+            </li>
+            <li>
+              <a class="nav-btn" href="/auth/login">Sign In</a>
+            </li>
+          {% endif %}
+      </ul>
     </div>
   </nav>
 {% endblock %}
