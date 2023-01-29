@@ -11,7 +11,7 @@
       {% for card in deck.cards %}
         <div class="mtg-deck-card">
           <img src={{ card.image }} width="200">
-          <h3>x{{ card.count }}</h3>
+          <h3 class="mtg-sans">x{{ card.count }}</h3>
         </div>
       {% endfor %}
     </div>
@@ -32,7 +32,7 @@
           class="mtg-form">
           <legend>Add Comment ---
           </legend>
-          <div class="mtg-comm-from-inputs">
+          <div class="mtg-comm-form-inputs">
             <div class="mtg-elem">
               <input
                 id="comm-heading"

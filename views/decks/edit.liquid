@@ -11,8 +11,8 @@
         {% for card in deck.cards %}
           <div class="mtg-cards-list__card">
             <div class="mtg-cards-list__card__box">
-              <p>{{card.name}}</p>
-              <small>x{{card.count}}</small>
+              <span>{{card.name}}</span>
+              <span class="mtg-sans">x{{card.count}}</span>
             </div>
             <div class="mtg-cards-list__card__box">
               <form action="/cards/{{ deck.id }}/{{ card.id }}?_method=PUT" method="POST">
