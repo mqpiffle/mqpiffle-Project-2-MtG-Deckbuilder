@@ -1,55 +1,65 @@
 {% layout 'layout.liquid' %}
 {% block content %}
-  <h2>Deck Dashboard</h2>
+
   <div class="mtg-std-container mtg-display-width">
+    <h2 class="mtg-page-title">Deck Dashboard</h2>
     <a class="mtg-btn-p" href="/decks/new">Create New Deck</a>
-    {% if decks.length > 0 %}
-      <div class="mtg-grid-container">
-        <div class="mtg-deck-grid">
-          {% for deck in decks %}
-            <div class="mtg-deck-card">
-              <h3 class="card-header">{{ deck.name }}</h5>
-              <div class="card-body">
+    <div class="mtg-dashboard-grid-container">
+      <div class="mtg-dashboard-grid">
+        {% for deck in decks %}
+          <div class="mtg-dashboard-card">
+            <h3 class="mtg-dashboard-card__title">{{ deck.name }}</h3>
+            <div class="mtg-dashboard-card__main">
+              <div class="mtg-dashboard-card__counts">
                 <h5>
                   {{ deck.totalCount }} cards</h5>
-                <h6>owned by: {{ deck.owner.username }}</h6>
-                <p class="card-text">
-                  {{ deck.description }}
-                </p>
-                <div class="icon-container-inline">
-                  {% if deck.owner == userId %}
-                    <a href="/decks/{{ deck.id }}/edit-info">
-                      <button type="submit" class="mtg-btn-tp">
-                        <span class="material-symbols-outlined" style="color: var(--tertiary-dk); font-size: 36px">edit</span>
-                      </button>
-                    </a>
-                    <a href="/decks/{{ deck.id }}/edit">
-                      <button type="submit" class="mtg-btn-tp">
-                        <span class="material-symbols-outlined" style="color: var(--tertiary-dk); font-size: 36px">tune</span>
-                      </button>
-                    </a>
-                    <form action="/decks/{{ deck.id }}?_method=DELETE" method="POST">
-                      <button type="submit" class="mtg-btn-tp">
-                        <span class="material-symbols-outlined" style="color: var(--secondary-dk); font-size: 36px">delete</span>
-                      </button>
-                    </form>
-                  {% else %}
-                    <form action="/decks/{{ deck.id }}" method="GET">
-                      <button type="submit" class="mtg-btn-tp">
-                        <span class="material-symbols-outlined mtg-icon-md" style="color: var(--primary-dk); font-size: 36px">visibility</span>
-                      </button>
-                    </form>
-                  {% endif %}
-                </div>
+                <h5>{{ deck.comments.length }} comments</h5>
               </div>
+              <h6>owned by: {{ deck.owner.username }}</h6>
+              <p>
+                {{ deck.description }}
+              </p>
             </div>
-          {% endfor %}
+            <div class="mtg-icon-container-inline">
+              {% if deck.owner == userId %}
+                <a href="/decks/{{ deck.id }}/edit-info">
+                  <button type="submit" class="mtg-btn-tp">
+                    <span class="material-symbols-outlined" style="color: var(--tertiary-dk); font-size: 36px">edit</span>
+                  </button>
+                </a>
+                <a href="/decks/{{ deck.id }}/edit">
+                  <button type="submit" class="mtg-btn-tp">
+                    <span class="material-symbols-outlined" style="color: var(--tertiary-dk); font-size: 36px">tune</span>
+                  </button>
+                </a>
+                <form action="/decks/{{ deck.id }}?_method=DELETE" method="POST">
+                  <button type="submit" class="mtg-btn-tp">
+                    <span class="material-symbols-outlined" style="color: var(--secondary-dk); font-size: 36px">delete</span>
+                  </button>
+                </form>
+              {% else %}
+                <form action="/decks/{{ deck.id }}" method="GET">
+                  <button type="submit" class="mtg-btn-tp">
+                    <span class="material-symbols-outlined mtg-icon-md" style="color: var(--primary-dk); font-size: 36px">visibility</span>
+                  </button>
+                </form>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+        <div class="mtg-dashboard-card">
+          <h3 class="mtg-dashboard-card__title">Create New Deck</h3>
+          <div class="mtg-dashboard-card__main">
+            <div class="mtg-icon-container-inline">
+              <a href="/decks/new">
+                <button type="submit" class="mtg-btn-tp">
+                  <span class="material-symbols-outlined" style="color: var(--primary-dk); font-size: 60px">add_circle</span>
+                </button>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
-    {% else %}
-      <div class="container-md">
-        <h2>Wouldn't ya know...no decks to show!</h2>
-      </div>
-    {% endif %}
+    </div>
   </div>
 {% endblock %}
