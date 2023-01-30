@@ -3,9 +3,20 @@
 
   <div class="mtg-std-container mtg-display-width">
     <h2 class="mtg-page-title">Deck Dashboard</h2>
-    <a class="mtg-btn-p" href="/decks/new">Create New Deck</a>
     <div class="mtg-dashboard-grid-container">
       <div class="mtg-dashboard-grid">
+        <div class="mtg-dashboard-card">
+          <h3 class="mtg-dashboard-card__title">Create New Deck</h3>
+          <div class="mtg-dashboard-card__main">
+            <div class="mtg-icon-container-inline">
+              <a href="/decks/new">
+                <button type="submit" class="mtg-btn-tp">
+                  <span class="material-symbols-outlined" style="color: var(--primary-dk); font-size: 60px">add_circle</span>
+                </button>
+              </a>
+            </div>
+          </div>
+        </div>
         {% for deck in decks %}
           <div class="mtg-dashboard-card">
             <h3 class="mtg-dashboard-card__title">{{ deck.name }}</h3>
@@ -47,18 +58,7 @@
             </div>
           </div>
         {% endfor %}
-        <div class="mtg-dashboard-card">
-          <h3 class="mtg-dashboard-card__title">Create New Deck</h3>
-          <div class="mtg-dashboard-card__main">
-            <div class="mtg-icon-container-inline">
-              <a href="/decks/new">
-                <button type="submit" class="mtg-btn-tp">
-                  <span class="material-symbols-outlined" style="color: var(--primary-dk); font-size: 60px">add_circle</span>
-                </button>
-              </a>
-            </div>
-          </div>
-        </div>
+
       </div>
     </div>
   </div>

@@ -1,0 +1,36 @@
+{% layout 'layout.liquid' %}
+{% block content %}
+  <div class="mtg-inflx-container mtg-display-width">
+    <div class="mtg-form">
+      <form action="/collections" method="POST">
+        <fieldset>
+          <legend>
+            <h2>Create New Collection</h2>
+          </legend>
+          <div class="mtg-elem">
+            <label class="form-label">Collection Name:
+            </label>
+            <input
+              type="text"
+              name="name"
+              placeholder="Reign of Death"
+              class="form-control">
+          </div>
+          <div class="mtg-elem">
+            <label class="form-label">Description:</label>
+            <textarea
+              class="form-control"
+              name="description"
+              rows="12"
+              cols="33"
+              maxlength="330"></textarea>
+          </div>
+        </fieldset>
+        <div class="btn-container-block">
+          <button type="submit" class="mtg-btn-p">
+            Add Cards from 4ED and Ice Age</button>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}

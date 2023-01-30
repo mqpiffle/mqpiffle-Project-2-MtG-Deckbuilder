@@ -92,8 +92,7 @@ router.get('/:id/edit', async (req, res) => {
     // cards returns an object as data which includes one element
     // and array of cards
     // need to drill down into that array to access the properties needed
-    cardData = card.data
-    const cards = cardData.cards.map(card => {
+    const cards = card.data.cards.map(card => {
         return { image: card.imageUrl, id: card.id, name: card.name }
     })
     Deck.findById(deckId)

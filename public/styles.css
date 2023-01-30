@@ -91,6 +91,10 @@ fieldset {
     width: 100%;
 }
 
+legend {
+    font-family: var(--font-display);
+}
+
 /* HEADER styles */
 
 header {
