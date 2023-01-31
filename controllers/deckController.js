@@ -68,7 +68,6 @@ router.post('/', (req, res) => {
     } else {
         Deck.create(req.body)
             .then(deck => {
-                console.log('this was returned from create', deck)
                 if (thePath == 'allDecks') {
                     res.redirect('/decks')
                 } else if (thePath == 'addCards') {
@@ -85,16 +84,16 @@ router.post('/', (req, res) => {
 router.get('/:id/edit', async (req, res) => {
     // we need to get the id
     const deckId = req.params.id
-    const card = await axios(`${process.env.MTG_URL}?set=4ED&random=true`)
+    // const card = await axios(`${process.env.MTG_URL}?set=4ED&random=true`)
     // if a card is selected, push the data passed from the req.body
     // into the cardArray to be displayed in the list
 
     // cards returns an object as data which includes one element
     // and array of cards
     // need to drill down into that array to access the properties needed
-    const cards = card.data.cards.map(card => {
-        return { image: card.imageUrl, id: card.id, name: card.name }
-    })
+    // const cards = card.data.cards.map(card => {
+    //     return { image: card.imageUrl, id: card.id, name: card.name }
+    // })
     Deck.findById(deckId)
         .then(deck => {
             res.render('decks/edit', { cards, deck, ...req.session })

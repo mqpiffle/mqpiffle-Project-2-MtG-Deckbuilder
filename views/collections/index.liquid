@@ -1,0 +1,58 @@
+{% layout 'layout.liquid' %}
+{% block content %}
+
+  <div class="mtg-std-container mtg-display-width">
+    <h2 class="mtg-page-title">Collection Dashboard</h2>
+    <div class="mtg-dashboard-grid-container">
+      <div class="mtg-dashboard-grid">
+        <div class="mtg-dashboard-card">
+          <h3 class="mtg-dashboard-card__title">Create New Collection</h3>
+          <div class="mtg-dashboard-card__main">
+            <div class="mtg-icon-container-inline">
+              <a href="/collections/new">
+                <button type="submit" class="mtg-btn-tp">
+                  <span class="material-symbols-outlined" style="color: var(--primary-dk); font-size: 60px">add_circle</span>
+                </button>
+              </a>
+            </div>
+          </div>
+        </div>
+        {% for collection in collections %}
+          <div class="mtg-dashboard-card">
+            <h3 class="mtg-dashboard-card__title">{{ collection.name }}</h3>
+            <div class="mtg-dashboard-card__main">
+              <h5>
+                {{ collection.cards.length }} cards</h5>
+              <p>
+                {{ collection.description }}
+              </p>
+            </div>
+            <div class="mtg-icon-container-inline">
+              <a href="/collections/{{ collection.id }}/edit-info">
+                <button type="submit" class="mtg-btn-tp">
+                  <span class="material-symbols-outlined" style="color: var(--tertiary-dk); font-size: 36px">edit</span>
+                </button>
+              </a>
+              <a href="/collections/{{ collection.id }}/edit">
+                <button type="submit" class="mtg-btn-tp">
+                  <span class="material-symbols-outlined" style="color: var(--tertiary-dk); font-size: 36px">tune</span>
+                </button>
+              </a>
+              <form action="/collections/{{ collection.id }}" method="GET">
+                <button type="submit" class="mtg-btn-tp">
+                  <span class="material-symbols-outlined mtg-icon-md" style="color: var(--primary-dk); font-size: 36px">visibility</span>
+                </button>
+              </form>
+              <form action="/collections/{{ collection.id }}?_method=DELETE" method="POST">
+                <button type="submit" class="mtg-btn-tp">
+                  <span class="material-symbols-outlined" style="color: var(--secondary-dk); font-size: 36px">delete</span>
+                </button>
+              </form>
+            </div>
+          </div>
+        {% endfor %}
+
+      </div>
+    </div>
+  </div>
+{% endblock %}

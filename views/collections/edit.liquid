@@ -1,0 +1,91 @@
+{% layout 'layout.liquid' %}
+{% block content %}
+  <div class="mtg-inflx-container mtg-display-width">
+          
+    {% # 'left' side of screen %}
+    {% # DETAILS on top %}
+    <div class="mtg-display-left">
+        <h2>{{collection.name}}</h2>
+        <p>{{collection.description}}</p>
+      <div class="mtg-cards-list">
+        {% for card in collection.cards %}
+          <div class="mtg-cards-list__card">
+            <div class="mtg-cards-list__card__box">
+              <span>{{card.name}}</span>
+              <span class="mtg-sans">x{{card.count}}</span>
+            </div>
+            <div class="mtg-cards-list__card__box">
+              <form action="/cards/{{ collection.id }}/{{ card.id }}?_method=PUT" method="POST">
+                <button type="submit" name="adjustor" value="remove" class="mtg-btn-tp">
+                  <span class="material-symbols-outlined" style="color: var(--gray-20)">remove</span>
+                </button>
+              </form>
+              <form action="/cards/{{ collection.id }}/{{ card.id }}?_method=PUT" method="POST">
+                <button type="submit" name="adjustor" value="add" class="mtg-btn-tp">
+                  <span class="material-symbols-outlined" style="color: var(--gray-20)">add</span>
+                </button>
+              </form>
+              <form action="/cards/delete/{{ collection.id }}/{{ card.id }}?_method=DELETE" method="POST">
+                <button type="submit" class="mtg-btn-tp">
+                  <span class="material-symbols-outlined" style="color: var(--secondary)">delete</span>
+                </button>
+              </form>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      {% # grid with one element (1fr) per row %}
+    </div>
+    <div class="mtg-display-right">
+      {% # since only 100 cards may be pulled from the api at a time %}
+      {% # set up a filter by color %}
+      {% # <div class="mtg-form">
+        
+        #<form action="/collections/new" method="GET">
+         # <fieldset>
+          #  <legend>
+           #   <h2>Filter card by color, land, or artifact</h2>
+            
+           #</legend>
+            #<div class="mtg-elem">
+             # <label class="form-label">Options:
+              #</label>
+             # <select name="cardfilter" class="form-control">
+              #  <option value="B" selected>Black Cards</option>
+               # <option value="U">Blue Cards</option>
+                #<option value="G">Green Cards</option>
+                #<option value="R">Red Cards</option>
+                #<option value="W">White Cards</option>
+                #</select>
+            #</div>
+          #</fieldset>
+          #<div class="btn-container-block">
+            #<input
+              #type="submit"
+              #value="Filter"
+              #class="mtg-btn-p">
+          #</div>
+        #</form>
+      #</div> %}
+      <div class="mtg-cards-grid">
+      {% if cards.length > 0 %}
+        {% for card in cards %}
+          <div class="mtg-card-container">
+            <img src="{{card.image}}" width="200"></img>
+            <form action="/cards/{{ collection.id }}" method="POST">
+              <input hidden name="name" value="{{card.name}}">
+              <input hidden name="mtgId" value="{{card.id}}">
+              <input hidden name="image" value="{{card.image}}">
+              <input hidden name="count" value="1">
+              <button type="submit" class="mtg-btn-tp">
+                <span class="material-symbols-outlined" style="color: var(--primary-dk); font-size: 48px">library_add</span>
+              </button>
+            </form>
+          </div>
+        {% endfor %}
+      {% else %}
+      {% endif %}
+      </div>
+    </div>
+  </div>
+{% endblock %}

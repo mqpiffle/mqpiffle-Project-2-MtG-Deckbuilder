@@ -1,0 +1,20 @@
+{% layout 'layout.liquid' %}
+{% block content %}
+  <div class="mtg-std-container mtg-display-width">
+    {% # TITLE and DESCRIPTION %}
+    <div class="mtg-text-width mtg-text-center">
+      <h2 class="mtg-elem">{{ collection.name }}</h2>
+      <p class="mtg-elem">{{ collection.description }}</p>
+    </div>
+    {% # CARDS GRID %}
+    <div class="mtg-dashboard-grid-container mtg-mt-2">
+      <div class="mtg-cards-grid">
+        {% for card in collection.cards %}
+          <div class="mtg-collection-card">
+            <img src={{ card.image }} width="200">
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endblock %}
