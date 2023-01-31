@@ -33,6 +33,9 @@ router.get('/new', (req, res) => {
 
 router.post('/', async (req, res) => {
     const fullArray = []
+    const coreSet = req.body.cardCoreSet
+
+    console.log(coreSet)
 
     // pull cards from mtg api with multiple axios calls
     // because the api limits to 100 calls at a time
@@ -41,15 +44,17 @@ router.post('/', async (req, res) => {
     // TODO implement ability to define set(s) via list boxes on the front end
     // will probably need to create an array of sets
     // and for each set make these axios calls???????
-
-    const redReq = axios.get(`${process.env.MTG_URL}?set=4ED&colors=R`)
-    const blueReq = axios.get(`${process.env.MTG_URL}?set=4ED&colors=U`)
-    const greenReq = axios.get(`${process.env.MTG_URL}?set=4ED&colors=G`)
-    const whiteReq = axios.get(`${process.env.MTG_URL}?set=4ED&colors=W`)
-    const blackReq = axios.get(`${process.env.MTG_URL}?set=4ED&colors=B`)
-    const landReq = axios.get(`${process.env.MTG_URL}?set=4ED&types=Land`)
+    // ${coreSet}
+    const redReq = axios.get(`${process.env.MTG_URL}?set=${coreSet}&colors=R`)
+    const blueReq = axios.get(`${process.env.MTG_URL}?set=${coreSet}&colors=U`)
+    const greenReq = axios.get(`${process.env.MTG_URL}?set=${coreSet}&colors=G`)
+    const whiteReq = axios.get(`${process.env.MTG_URL}?set=${coreSet}&colors=W`)
+    const blackReq = axios.get(`${process.env.MTG_URL}?set=${coreSet}&colors=B`)
+    const landReq = axios.get(
+        `${process.env.MTG_URL}?set=${coreSet}&types=Land`
+    )
     const artifactReq = axios.get(
-        `${process.env.MTG_URL}?set=4ED&types=Artifact`
+        `${process.env.MTG_URL}?set=${coreSet}&types=Artifact`
     )
 
     await Promise.all([
@@ -85,7 +90,6 @@ router.post('/', async (req, res) => {
         //     // console.log(req.body)
         // })
         .then(() => {
-            // TODO implemet collection pages (ala decks)
             // so many collections can be created
             Collection.create(req.body)
                 .then(collection => {
@@ -167,7 +171,7 @@ router.put('/:id', (req, res) => {
 })
 
 // show route
-router.get('/:id', (req, res) => {
+router.get('/:id', async (req, res) => {
     const id = req.params.id
     Collection.findById(id)
         .then(collection => {

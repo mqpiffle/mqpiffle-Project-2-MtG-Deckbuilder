@@ -14,7 +14,8 @@
               type="text"
               name="name"
               placeholder="Reign of Death"
-              class="form-control">
+              class="form-control"
+              required>
           </div>
           <div class="mtg-elem">
             <label class="form-label">Description:</label>
@@ -23,12 +24,41 @@
               name="description"
               rows="12"
               cols="33"
-              maxlength="330"></textarea>
+              maxlength="330"
+              required></textarea>
+          </div>
+          <div class="mtg-elem">
+            <label class="form-label">Core Set:</label>
+            <select
+              name="cardCoreSet"
+              class="form-select"
+              required>
+              <option value="LEA" selected>Limited Edition Alpha</option>
+              <option value="LEB">Limited Edition Beta</option>
+              <option value="2ED">2nd Edition</option>
+              <option value="3ED">3rd Edition</option>
+              <option value="4ED">4th Edition</option>
+              <option value="5ED">5th Edition</option>
+              <option value="6ED">6th Edition</option>
+              <option value="7ED">7th Edition</option>
+              <option value="8ED">8th Edition</option>
+              <option value="9ED">9th Edition</option>
+              <option value="10E">10th Edition</option>
+              <option value="M10">Magic 2010</option>
+              <option value="M12">Magic 2012</option>
+              <option value="M13">Magic 2013</option>
+              <option value="M14">Magic 2014</option>
+              <option value="M15">Magic 2015</option>
+              <option value="M19">Magic 2019</option>
+              <option value="M20">Magic 2020</option>
+              <option value="M21">Magic 2021</option>
+              <option value="ORI">Magic Origins</option>
+            </select>
           </div>
         </fieldset>
         <div class="btn-container-block">
           <button type="submit" class="mtg-btn-p">
-            Add Cards from 4ED and Ice Age</button>
+            Create Collection</button>
         </div>
       </form>
     </div>
