@@ -1,16 +1,24 @@
-// Import Dependencies
+// *********** *********** *********** //
+//  Dependencies                       //
+// *********** *********** *********** //
+
 const express = require('express')
 const Deck = require('../models/deck')
 const Collection = require('../models/collection')
 const axios = require('axios')
 require('dotenv').config()
 
-// Create router
+// *********** *********** *********** //
+//  Router                             //
+// *********** *********** *********** //
+
 const router = express.Router()
 
 // Router Middleware
 // Authorization middleware
-// If you have some resources that should be accessible to everyone regardless of loggedIn status, this middleware can be moved, commented out, or deleted.
+// If you have some resources that should be accessible to everyone regardless of loggedIn status
+// this middleware can be moved, commented out, or deleted.
+
 router.use((req, res, next) => {
     // checking the loggedIn boolean of our session
     if (req.session.loggedIn) {
@@ -22,7 +30,9 @@ router.use((req, res, next) => {
     }
 })
 
-// Routes
+// *********** *********** *********** //
+//  Routes                             //
+// *********** *********** *********** //
 
 // index ALL
 router.get('/', (req, res) => {
@@ -159,5 +169,8 @@ router.delete('/:id', (req, res) => {
         })
 })
 
-// Export the Router
+// *********** *********** *********** //
+//  Export Router                      //
+// *********** *********** *********** //
+
 module.exports = router

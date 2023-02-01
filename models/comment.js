@@ -1,10 +1,19 @@
-// import dependencies
+// *********** *********** *********** //
+//  Dependencies                       //
+// *********** *********** *********** //
+
 const mongoose = require('../utils/connection')
 
 // import user model for populate
+
 const User = require('./user')
 
+// *********** *********** *********** //
+//  Construct Schema                   //
+// *********** *********** *********** //
+
 // destructure the schema and model constructors from mongoose
+
 const { Schema } = mongoose
 
 const commentSchema = new Schema(
@@ -20,7 +29,8 @@ const commentSchema = new Schema(
     { timestamps: true }
 )
 
-/////////////////////////////////
-// Export our Model
-/////////////////////////////////
+// *********** *********** *********** //
+//  Export Schema                      //
+// *********** *********** *********** //
+
 module.exports = commentSchema

@@ -1,7 +1,17 @@
-// import what I need
-const { Schema, model } = require("../utils/connection.js");
+// *********** *********** *********** //
+//  Dependencies                       //
+// *********** *********** *********** //
 
-// create the schema
+const mongoose = require('../utils/connection.js')
+
+// *********** *********** *********** //
+//  Construct Schema                   //
+// *********** *********** *********** //
+
+// destructure the schema and model constructors from mongoose
+
+const { Schema, model } = mongoose
+
 const UserSchema = new Schema(
     {
         username: {
@@ -15,10 +25,12 @@ const UserSchema = new Schema(
         },
     },
     { timestamps: true }
-);
+)
 
-// creat the model
-const User = model("User", UserSchema);
+// *********** *********** *********** //
+//  Build and Export Model             //
+// *********** *********** *********** //
 
-// export the model
-module.exports = User;
+const User = model('User', UserSchema)
+
+module.exports = User

@@ -1,9 +1,15 @@
+// *********** *********** *********** //
+//  Dependencies                       //
+// *********** *********** *********** //
+
 const mongoose = require('../utils/connection')
 
-// import user model for populate
-const User = require('./user')
+// *********** *********** *********** //
+//  Construct Schema                   //
+// *********** *********** *********** //
 
 // destructure the schema and model constructors from mongoose
+
 const { Schema } = mongoose
 
 const cardSchema = new Schema(
@@ -16,7 +22,8 @@ const cardSchema = new Schema(
     { timestamps: true }
 )
 
-/////////////////////////////////
-// Export our Model
-/////////////////////////////////
+// *********** *********** *********** //
+//  Export Schema                      //
+// *********** *********** *********** //
+
 module.exports = cardSchema

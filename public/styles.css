@@ -1,7 +1,3 @@
-/* @import url("https://fonts.googleapis.com/css2?family=Tourney:ital,wght@0,600;1,600&display=swap"); */
-/* Righteous display & Inter sans */
-/* @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Righteous&display=swap"); */
-/* Fredericka the Great display & Inter sans */
 @import url('https://fonts.googleapis.com/css2?family=Puritan:ital,wght@0,400;0,700;1,400;1,700&family=Special+Elite&family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 *,
@@ -16,12 +12,9 @@
     --primary: hsl(245, 77%, 36%);
     --primary-lt: hsl(245, 68%, 57%);
     --primary-dk: hsl(245, 98%, 18%);
-    --secondary: hsl(335, 98%, 36%);
+    --secondary: hsl(335, 77%, 36%);
     --secondary-lt: hsl(335, 68%, 45%);
     --secondary-dk: hsl(335, 98%, 18%);
-    /* --secondary-lt: hsl(154, 63%, 58%);
-    --secondary: hsl(154, 74%, 35%);
-    --secondary-dk: hsl(154, 58%, 25%); */
     --tertiary: hsl(55, 60%, 36%);
     --tertiary-lt: hsl(55, 42%, 45%);
     --tertiary-dk: hsl(55, 70%, 29%);
@@ -51,10 +44,6 @@ h5,
 h6 {
     margin: 0;
 }
-
-/* html {
-    position: relative;
-} */
 
 body {
     display: flex;

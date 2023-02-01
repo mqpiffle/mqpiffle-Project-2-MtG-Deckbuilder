@@ -1,12 +1,21 @@
-// import dependencies
+// *********** *********** *********** //
+//  Dependencies                       //
+// *********** *********** *********** //
+
 const mongoose = require('../utils/connection')
 const commentSchema = require('./comment')
 const cardSchema = require('./card')
 
+// *********** *********** *********** //
+//  Construct Schema                   //
+// *********** *********** *********** //
+
 // import user model for populate
+
 const User = require('./user')
 
 // destructure the schema and model constructors from mongoose
+
 const { Schema, model } = mongoose
 
 const deckSchema = new Schema(
@@ -33,15 +42,22 @@ const deckSchema = new Schema(
     }
 )
 
+// *********** *********** *********** //
+//  Build Virtuals                     //
+// *********** *********** *********** //
+
+// this virtual accesses the count property of every card in the deck with .map()
+// then adds all of those counts together with .reduce()
+// so they can be accessed on the front end with the totalCount property
+
 deckSchema.virtual('totalCount').get(function () {
     return this.cards.map(card => card.count).reduce((x, y) => x + y, 0)
 })
 
-const Deck = model('Deck', deckSchema)
-// virtual to loop over card to build out object
-// using count
+// *********** *********** *********** //
+//  Build and Export Model             //
+// *********** *********** *********** //
 
-/////////////////////////////////
-// Export our Model
-/////////////////////////////////
+const Deck = model('Deck', deckSchema)
+
 module.exports = Deck

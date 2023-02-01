@@ -1,6 +1,7 @@
 // *********** *********** *********** //
 //  Dependencies                       //
 // *********** *********** *********** //
+
 const express = require('express')
 const Collection = require('../models/collection')
 const axios = require('axios')
@@ -9,6 +10,7 @@ require('dotenv').config()
 // *********** *********** *********** //
 //  Router                             //
 // *********** *********** *********** //
+
 const router = express.Router()
 
 // *********** *********** *********** //
@@ -39,11 +41,7 @@ router.post('/', async (req, res) => {
 
     // pull cards from mtg api with multiple axios calls
     // because the api limits to 100 calls at a time
-    // and many card sets have >100 cards
-
-    // will probably need to create an array of sets
-    // and for each set make these axios calls???????
-    // ${coreSet}
+    // and many of the card sets have >100 cards
     const redReq = axios.get(`${process.env.MTG_URL}?set=${coreSet}&colors=R`)
     const blueReq = axios.get(`${process.env.MTG_URL}?set=${coreSet}&colors=U`)
     const greenReq = axios.get(`${process.env.MTG_URL}?set=${coreSet}&colors=G`)
@@ -173,4 +171,5 @@ router.delete('/:id', (req, res) => {
 // *********** *********** *********** //
 //  Export Router                      //
 // *********** *********** *********** //
+
 module.exports = router
