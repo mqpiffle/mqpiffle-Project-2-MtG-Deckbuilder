@@ -41,7 +41,6 @@ router.post('/', async (req, res) => {
     // because the api limits to 100 calls at a time
     // and many card sets have >100 cards
 
-    // TODO implement ability to define set(s) via list boxes on the front end
     // will probably need to create an array of sets
     // and for each set make these axios calls???????
     // ${coreSet}
@@ -75,20 +74,6 @@ router.post('/', async (req, res) => {
             })
             // console.log('full array:', fullArray)
         })
-        // .then(allData => {
-        //     console.log('this is allData: ', allData)
-        //     // console.log(fullArray.flat())
-        //     const flatArray = fullArray.flat()
-        //     flatArray.map(card => {
-        //         cardsArray.push({
-        //             name: card.name,
-        //             mtgId: card.id,
-        //             image: card.imageUrl,
-        //             count: 1,
-        //         })
-        //     })
-        //     // console.log(req.body)
-        // })
         .then(() => {
             // so many collections can be created
             Collection.create(req.body)
@@ -116,15 +101,6 @@ router.post('/', async (req, res) => {
         .catch(err => {
             res.redirect(`/error?error=${err}`)
         })
-    // for now:
-    // make chained axios calls because of 100 card limit
-    // call lands, then push
-    // call artifacts, check for duplicates, then push
-    // call red cards, check for duplicates, then push
-    // .....
-    // then save
-    // then redirect
-    // handle errors
 })
 
 // edit route -> GET that takes us to the edit form view

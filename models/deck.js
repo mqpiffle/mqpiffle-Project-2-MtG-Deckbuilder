@@ -19,6 +19,7 @@ const deckSchema = new Schema(
         },
         cards: [cardSchema],
         comments: [commentSchema],
+        stock: { type: String, required: true },
     },
     {
         timestamps: true,
@@ -33,7 +34,7 @@ const deckSchema = new Schema(
 )
 
 deckSchema.virtual('totalCount').get(function () {
-    return this.cards.map(card => card.count).reduce((x, y) => x + y)
+    return this.cards.map(card => card.count).reduce((x, y) => x + y, 0)
 })
 
 const Deck = model('Deck', deckSchema)

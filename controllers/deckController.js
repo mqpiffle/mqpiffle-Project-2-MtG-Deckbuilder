@@ -1,6 +1,7 @@
 // Import Dependencies
 const express = require('express')
 const Deck = require('../models/deck')
+const Collection = require('../models/collection')
 const axios = require('axios')
 require('dotenv').config()
 
@@ -56,28 +57,21 @@ router.get('/mine', (req, res) => {
 // allowed collection to the page. these can be added with an add button
 router.get('/new', (req, res) => {
     // console.log(cards)
-    res.render('decks/new', { ...req.session })
+    Collection.find({}).then(collections => {
+        res.render('decks/new', { collections, ...req.session })
+    })
 })
 
 // create -> POST route that actually calls the db and makes a new document
 router.post('/', (req, res) => {
     req.body.owner = req.session.userId
-    const thePath = req.body.returnPath
-    if (thePath.back) {
-        res.redirect('/decks')
-    } else {
-        Deck.create(req.body)
-            .then(deck => {
-                if (thePath == 'allDecks') {
-                    res.redirect('/decks')
-                } else if (thePath == 'addCards') {
-                    res.redirect(`/decks/${deck.id}/edit`)
-                }
-            })
-            .catch(error => {
-                res.redirect(`/error?error=${error}`)
-            })
-    }
+    Deck.create(req.body)
+        .then(deck => {
+            res.redirect('/decks')
+        })
+        .catch(error => {
+            res.redirect(`/error?error=${error}`)
+        })
 })
 
 // edit route -> GET that takes us to the edit form view
@@ -96,7 +90,18 @@ router.get('/:id/edit', async (req, res) => {
     // })
     Deck.findById(deckId)
         .then(deck => {
-            res.render('decks/edit', { cards, deck, ...req.session })
+            Collection.findById(deck.stock)
+                .then(collection => {
+                    console.log(collection.cards)
+                    res.render('decks/edit', {
+                        deck,
+                        collection,
+                        ...req.session,
+                    })
+                })
+                .catch(error => {
+                    res.redirect(`/error?error=${error}`)
+                })
         })
         .catch(error => {
             res.redirect(`/error?error=${error}`)

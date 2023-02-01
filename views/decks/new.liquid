@@ -26,6 +26,17 @@
               cols="33"
               maxlength="330"></textarea>
           </div>
+          <div class="mtg-elem">
+            <label class="form-label">Choose a Collection:</label>
+            <select
+              name="stock"
+              class="form-select"
+              required>
+              {% for collection in collections %}
+                <option value="{{ collection.id }}" selected>{{ collection.name }}</option>
+              {% endfor %}
+            </select>
+          </div>
         </fieldset>
         <div class="btn-container-block">
           <button
@@ -33,13 +44,7 @@
             class="mtg-btn-p"
             name="returnPath"
             value="allDecks">
-            Create Deck and Return to All Decks</button>
-          <button
-            type="submit"
-            class="mtg-btn-p"
-            name="returnPath"
-            value="addCards">
-            Create and Add Some Cards</button>
+            Create Deck</button>
         </div>
       </form>
     </div>

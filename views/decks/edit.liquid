@@ -68,8 +68,8 @@
         #</form>
       #</div> %}
       <div class="mtg-cards-grid">
-      {% if cards.length > 0 %}
-        {% for card in cards %}
+      {% if collection.cards.length > 0 %}
+        {% for card in collection.cards %}
           <div class="mtg-card-container">
             <img src="{{card.image}}" width="200"></img>
             <form action="/cards/{{ deck.id }}" method="POST">
