@@ -1,18 +1,17 @@
 {% layout 'layout.liquid' %}
 {% block content %}
   <div class="mtg-inflx-container mtg-display-width">
-          
     {% # 'left' side of screen %}
     {% # DETAILS on top %}
     <div class="mtg-display-left">
-        <h2>{{deck.name}}</h2>
-        <p>{{deck.description}}</p>
+        <h2>{{ deck.name }}</h2>
+        <p>{{ deck.description }}</p>
       <div class="mtg-cards-list">
         {% for card in deck.cards %}
           <div class="mtg-cards-list__card">
             <div class="mtg-cards-list__card__box">
-              <span>{{card.name}}</span>
-              <span class="mtg-sans">x{{card.count}}</span>
+              <span>{{ card.name }}</span>
+              <span class="mtg-sans">x{{ card.count }}</span>
             </div>
             <div class="mtg-cards-list__card__box">
               <form action="/cards/{{ deck.id }}/{{ card.id }}?_method=PUT" method="POST">
@@ -34,48 +33,17 @@
           </div>
         {% endfor %}
       </div>
-      {% # grid with one element (1fr) per row %}
     </div>
     <div class="mtg-display-right">
-      {% # since only 100 cards may be pulled from the api at a time %}
-      {% # set up a filter by color %}
-      {% # <div class="mtg-form">
-        
-        #<form action="/decks/new" method="GET">
-         # <fieldset>
-          #  <legend>
-           #   <h2>Filter card by color, land, or artifact</h2>
-            
-           #</legend>
-            #<div class="mtg-elem">
-             # <label class="form-label">Options:
-              #</label>
-             # <select name="cardfilter" class="form-control">
-              #  <option value="B" selected>Black Cards</option>
-               # <option value="U">Blue Cards</option>
-                #<option value="G">Green Cards</option>
-                #<option value="R">Red Cards</option>
-                #<option value="W">White Cards</option>
-                #</select>
-            #</div>
-          #</fieldset>
-          #<div class="btn-container-block">
-            #<input
-              #type="submit"
-              #value="Filter"
-              #class="mtg-btn-p">
-          #</div>
-        #</form>
-      #</div> %}
       <div class="mtg-cards-grid">
       {% if collection.cards.length > 0 %}
         {% for card in collection.cards %}
           <div class="mtg-card-container">
-            <img src="{{card.image}}" width="200"></img>
+            <img src="{{ card.image }}" width="200"></img>
             <form action="/cards/{{ deck.id }}" method="POST">
-              <input hidden name="name" value="{{card.name}}">
-              <input hidden name="mtgId" value="{{card.id}}">
-              <input hidden name="image" value="{{card.image}}">
+              <input hidden name="name" value="{{ card.name }}">
+              <input hidden name="mtgId" value="{{ card.id }}">
+              <input hidden name="image" value="{{ card.image }}">
               <input hidden name="count" value="1">
               <button type="submit" class="mtg-btn-tp">
                 <span class="material-symbols-outlined" style="color: var(--primary-dk); font-size: 48px">library_add</span>
