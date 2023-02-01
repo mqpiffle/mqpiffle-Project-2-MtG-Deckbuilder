@@ -33,6 +33,11 @@
             </div>
             <div class="mtg-icon-container-inline">
               {% if deck.owner == userId %}
+                <form action="/decks/{{ deck.id }}" method="GET">
+                  <button type="submit" class="mtg-btn-tp">
+                    <span class="material-symbols-outlined mtg-icon-md" style="color: var(--primary-dk); font-size: 36px">visibility</span>
+                  </button>
+                </form>
                 <a href="/decks/{{ deck.id }}/edit-info">
                   <button type="submit" class="mtg-btn-tp">
                     <span class="material-symbols-outlined" style="color: var(--tertiary-dk); font-size: 36px">edit</span>

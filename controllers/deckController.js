@@ -19,16 +19,16 @@ const router = express.Router()
 // If you have some resources that should be accessible to everyone regardless of loggedIn status
 // this middleware can be moved, commented out, or deleted.
 
-router.use((req, res, next) => {
-    // checking the loggedIn boolean of our session
-    if (req.session.loggedIn) {
-        // if they're logged in, go to the next thing(thats the controller)
-        next()
-    } else {
-        // if they're not logged in, send them to the login page
-        res.redirect('/auth/login')
-    }
-})
+// router.use((req, res, next) => {
+// checking the loggedIn boolean of our session
+// if (req.session.loggedIn) {
+// if they're logged in, go to the next thing(thats the controller)
+//     next()
+// } else {
+// if they're not logged in, send them to the login page
+//         res.redirect('/auth/login')
+//     }
+// })
 
 // *********** *********** *********** //
 //  Routes                             //
@@ -86,6 +86,7 @@ router.post('/', (req, res) => {
 
 // edit route -> GET that takes us to the edit form view
 router.get('/:id/edit', async (req, res) => {
+    const { loggedIn } = req.session
     // we need to get the id
     const deckId = req.params.id
     // const card = await axios(`${process.env.MTG_URL}?set=4ED&random=true`)
@@ -98,24 +99,28 @@ router.get('/:id/edit', async (req, res) => {
     // const cards = card.data.cards.map(card => {
     //     return { image: card.imageUrl, id: card.id, name: card.name }
     // })
-    Deck.findById(deckId)
-        .then(deck => {
-            Collection.findById(deck.stock)
-                .then(collection => {
-                    console.log(collection.cards)
-                    res.render('decks/edit', {
-                        deck,
-                        collection,
-                        ...req.session,
+    if (loggedIn) {
+        Deck.findById(deckId)
+            .then(deck => {
+                Collection.findById(deck.stock)
+                    .then(collection => {
+                        console.log(collection.cards)
+                        res.render('decks/edit', {
+                            deck,
+                            collection,
+                            ...req.session,
+                        })
                     })
-                })
-                .catch(error => {
-                    res.redirect(`/error?error=${error}`)
-                })
-        })
-        .catch(error => {
-            res.redirect(`/error?error=${error}`)
-        })
+                    .catch(error => {
+                        res.redirect(`/error?error=${error}`)
+                    })
+            })
+            .catch(error => {
+                res.redirect(`/error?error=${error}`)
+            })
+    } else {
+        res.redirect('/auth/login')
+    }
 })
 
 // edit route -> GET that takes us to the edit form view

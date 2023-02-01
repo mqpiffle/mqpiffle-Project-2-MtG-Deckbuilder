@@ -103,19 +103,25 @@ router.post('/', async (req, res) => {
 
 // edit route -> GET that takes us to the edit form view
 router.get('/:id/edit', async (req, res) => {
+    const { loggedIn } = req.session
     // we need to get the id
     const collectionId = req.params.id
-    Collection.findById(collectionId)
-        .then(collection => {
-            res.render('collections/edit', {
-                cards,
-                collection,
-                ...req.session,
+
+    if (loggedIn) {
+        Collection.findById(collectionId)
+            .then(collection => {
+                res.render('collections/edit', {
+                    cards,
+                    collection,
+                    ...req.session,
+                })
             })
-        })
-        .catch(error => {
-            res.redirect(`/error?error=${error}`)
-        })
+            .catch(error => {
+                res.redirect(`/error?error=${error}`)
+            })
+    } else {
+        res.redirect('/auth/login')
+    }
 })
 
 // edit route -> GET that takes us to the edit form view

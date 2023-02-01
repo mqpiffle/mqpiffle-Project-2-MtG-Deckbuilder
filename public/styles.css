@@ -495,7 +495,7 @@ header {
     align-items: start;
     gap: 0.5rem;
     padding: 0.5rem;
-    background-color: pink;
+    background-color: var(--gray-100);
     border-radius: 0.5rem;
     box-shadow: 3px 3px 7px var(--shadow-lt);
     transition: box-shadow 110ms ease;
