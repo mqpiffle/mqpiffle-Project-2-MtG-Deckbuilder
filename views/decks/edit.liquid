@@ -39,7 +39,7 @@
       {% if collection.cards.length > 0 %}
         {% for card in collection.cards %}
           <div class="mtg-card-container">
-            <img src="{{ card.image }}" width="200"></img>
+            <img src="{{ card.image }}" width="175"></img>
             <form action="/cards/{{ deck.id }}" method="POST">
               <input hidden name="name" value="{{ card.name }}">
               <input hidden name="mtgId" value="{{ card.id }}">

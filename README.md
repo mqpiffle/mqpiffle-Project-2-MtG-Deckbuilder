@@ -1,24 +1,26 @@
 # MtG Deckbuilder App
 
+![Alt text](images/Screenshot%20from%202023-02-01%2014-37-29.png)
+
 ## Overview
 
 MtG Deckbuilder allows a group of people to create a tournament style MtG deck from a collection of cards. It also allows all registered users to comment on any deck.
 
 ## Goals Summary
 
-Create a collection of 'approved' cards pulled from the MtG api, then each user may build decks from those cards, giving their freinds the opportunity to troll them endlessly with comments.
+Create a collection of cards pulled from the MtG api based on the sets of your coosing. From there, each user may build decks from a collection, giving them the ability to theorycraft and their freinds the opportunity to troll their creations endlessly with comments.
 
 ### MVP
 
 -   user authentication and authorization, including signup, login, and log out
--   create a collection of 'allowed' cards based on certain MtG releases. This will be haedcoded in the schema for mvp.
+-   create a collection of cards based on certain MtG releases. This will be hardcoded in the schema for mvp.
 -   users will be able to choose cards from the collection
 -   decks will just be another collection (not a competition style deck with dechbuilding rules)
 -   users view and/or comment on any collection, but may onle create and edit their own (and only if logged in)
 
 ### Stretch Goals
 
--   a collection can be created or edited dynamically by allowing choosing cards from certain releases or other factors
+-   (complete, cards populated from api) a collection can be created or edited dynamically by allowing choosing cards from certain releases or other factors
 -   add rules to deckbuilding similar to MtG rules (need certain # of land, only allow so many of each card, etc)
 -   basic sorting on collection and deck views (by color/type/etc)
 
@@ -63,6 +65,18 @@ Create a collection of 'approved' cards pulled from the MtG api, then each user 
 | /decks/:id      | PATCH/PUT     | update     |
 | /decks/:id      | DELETE        | destroy    |
 
+#### Collections
+
+| **URL**               | **HTTP Verb** | **Action** |
+| --------------------- | ------------- | ---------- |
+| /collections/         | GET           | index      |
+| /collections/:id      | GET           | show       |
+| /collections/new      | GET           | new        |
+| /collections          | POST          | create     |
+| /collections/:id/edit | GET           | edit       |
+| /collections/:id      | PATCH/PUT     | update     |
+| /collections/:id      | DELETE        | destroy    |
+
 #### Comments
 
 | **URL**                             | **HTTP Verb** | **Action** |
@@ -94,6 +108,3 @@ Create a collection of 'approved' cards pulled from the MtG api, then each user 
 ![MtG-ERD-v1](images/MtG-ERD-v1.jpg)
 
 ### API Data Flow
-
--   CREATE Deck:
-    -   page loads with form on left and all cards on right
