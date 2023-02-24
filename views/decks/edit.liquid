@@ -35,7 +35,28 @@
       </div>
     </div>
     <div class="mtg-display-right">
-      <div class="mtg-cards-grid">
+      <div class="mtg-select">
+        <form action="/{{deck.id}}" method="GET">
+          <label class="form-label">Filter Options:</label>
+          <div class="btn-container-inline">
+            <select
+              name="filterSelect"
+              class="form-select"
+              required>
+              <option value="noFilter" selected>-- No Filter --</option>
+              <option value="R">Color: Red</option>
+              <option value="U">Color: Blue</option>
+              <option value="G">Color: Green</option>
+              <option value="W">Color: White</option>
+              <option value="B">Color: Black</option>
+              <option value="lands">Lands</option>
+              <option value="artifacts">Artifacts</option>
+            </select>
+            <button type="submit" class="mtg-btn-sm-p" style="flex-shrink: 0">Apply Filter</button>
+          </div>
+        </form>
+      </div>
+      <div class="mtg-cards-grid mtg-mt-2">
       {% if collection.cards.length > 0 %}
         {% for card in collection.cards %}
           <div class="mtg-card-container">

@@ -76,11 +76,13 @@ router.post('/', async (req, res) => {
             // so many collections can be created
             Collection.create(req.body)
                 .then(collection => {
+                    console.log(fullArray)
                     fullArray.map(card => {
                         collection.cards.push({
                             name: card.name,
                             mtgId: card.id,
                             image: card.imageUrl,
+                            color: card.colors,
                             count: 1,
                         })
                     })

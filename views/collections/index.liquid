@@ -28,21 +28,16 @@
               </p>
             </div>
             <div class="mtg-icon-container-inline">
-              <a href="/collections/{{ collection.id }}/edit-info">
-                <button type="submit" class="mtg-btn-tp">
-                  <span class="material-symbols-outlined" style="color: var(--tertiary-dk); font-size: 36px">edit</span>
-                </button>
-              </a>
-              <a href="/collections/{{ collection.id }}/edit">
-                <button type="submit" class="mtg-btn-tp">
-                  <span class="material-symbols-outlined" style="color: var(--tertiary-dk); font-size: 36px">tune</span>
-                </button>
-              </a>
               <form action="/collections/{{ collection.id }}" method="GET">
                 <button type="submit" class="mtg-btn-tp">
                   <span class="material-symbols-outlined mtg-icon-md" style="color: var(--primary-dk); font-size: 36px">visibility</span>
                 </button>
               </form>
+              <a href="/collections/{{ collection.id }}/edit-info">
+                <button type="submit" class="mtg-btn-tp">
+                  <span class="material-symbols-outlined" style="color: var(--tertiary-dk); font-size: 36px">edit</span>
+                </button>
+              </a>
               <form action="/collections/{{ collection.id }}?_method=DELETE" method="POST">
                 <button type="submit" class="mtg-btn-tp">
                   <span class="material-symbols-outlined" style="color: var(--secondary-dk); font-size: 36px">delete</span>

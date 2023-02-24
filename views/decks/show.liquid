@@ -9,7 +9,7 @@
     {% # CARDS GRID %}
     <div class="mtg-cards-grid mtg-display-width mtg-mt-2">
       {% for card in deck.cards %}
-        <div class="mtg-deck-card">
+        <div class="mtg-card-container">
           <img src={{ card.image }} width="175">
           <h3 class="mtg-sans">x{{ card.count }}</h3>
         </div>
